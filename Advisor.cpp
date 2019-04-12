@@ -52,52 +52,8 @@ public:
 	}
 
 	/*
-	 *  main.cpp should call this function and pass int value
-	 *  entered by the user.
-	 *  Advisor handles everything from here and returns to main.cpp
-	 *  when task is complete
-	 */
-	void handleMenuSelection(int selection) {
-
-		switch (selection) {
-		case 1:
-			printAdviseeList();
-			break;
-		case 2:
-			search();
-			break;
-		case 3:
-			printNotesMenu();
-			break;
-		case 4:
-			addAdvisee();
-			break;
-		case 5:
-			removeAdvisee();
-			break;
-		case 6:
-			moveAdvisees();
-			break;
-		case 7:
-			searchNonAdvisee();
-			break;
-		case 8:
-			printAdviseeList();
-			break;
-		case 9:
-			showMajorDetails();
-			break;
-		case 0:
-			return;
-			break;
-		default:
-			cout << "Error: Input invalid\n";
-		}
-	}
-
-	/*
 	 *  Displays detail list of students in given vector.
-	 *  Should be called by printMenu() to view all advisees
+	 *  Should be called by main.cpp to view all advisees
 	 *  and search() to only show search results
 	 */
 	static void printAdviseeList() {
@@ -188,7 +144,7 @@ public:
 	 *  Should only display name, ID and Advisor
 	 *  Do not use printAdviseeList()
 	 */
-	void searchNonAdvisee() {
+	void searchNonAdvisee(vector<Student> allStudents) {
 
 		//code will go here
 	}
