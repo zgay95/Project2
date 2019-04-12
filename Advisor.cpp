@@ -4,26 +4,19 @@
 //
 //  Created by Jose Monge on 3/29/19.
 //
+#include <stdio.h>
+#include <iostream>
+#include <string>
+#include <vector>
+#include "Advisor.h"
+#include "Student.h"
 
-#include "Advisor.hpp"
-
-class Advisor {
-
-private:
-	string ID;
-	string fName;
-	string lName;
-	string room;
-	string phone_num;
-	vector<Student> advisees;
-
-
-public:
+using namespace std;
 	/* Creates advisor instances, 
 	*  loads data passed into 
 	*  private fields to use in other functions
 	*/
-	Advisor(string ID, string fname, string lname, string room, string phone, vector<Student> ad) {
+	Advisor::Advisor(string ID, string fname, string lname, string room, string phone, vector<Student> ad) {
 		this->ID = ID;
 		this->fName = fname;
 		this->lName = lname;
@@ -35,7 +28,7 @@ public:
 	 *  Displays the advisor menu.
 	 *  Does not handle input
 	 */
-	static void printMenu() {
+	 void Advisor::printMenu() {
 
 		cout << "========== Menu ==========\n\n";
 		cout << " [1] Show all Advisees\n";
@@ -52,11 +45,21 @@ public:
 	}
 
 	/*
+	 *  main.cpp should call this function and pass int value
+	 *  entered by the user.
+	 *  Advisor handles everything from here and returns to main.cpp
+	 *  when task is complete
+	 */
+	void Advisor::handleMenuSelection(int selection) {
+
+	}
+
+	/*
 	 *  Displays detail list of students in given vector.
-	 *  Should be called by main.cpp to view all advisees
+	 *  Should be called by printMenu() to view all advisees
 	 *  and search() to only show search results
 	 */
-	static void printAdviseeList() {
+	void Advisor::printAdviseeList() {
 
 		//code will go here
 	}
@@ -65,7 +68,7 @@ public:
 	 *  Prompts and conducts search.
 	 *  Should use printAdviseeList() to show results
 	 */
-	void search() {
+	void Advisor::search() {
 
 		//code will go here
 	}
@@ -73,7 +76,7 @@ public:
 	/*
 	 *  Handles input
 	 */
-	void printNotesMenu() {
+	void Advisor::printNotesMenu() {
 
 		cout << "========== Notes ==========\n\n";
 		cout << " [1] View Notes\n";
@@ -101,12 +104,12 @@ public:
 		}
 	}
 
-	void showNotes() {
+	void Advisor::showNotes() {
 
 		//code will go here
 	}
 
-	void addNote() {
+	void Advisor::addNote() {
 
 		//code will go here
 	}
@@ -115,7 +118,7 @@ public:
 	 *  Prompt for student ID.
 	 *  Search for student and handle adding them
 	 */
-	void addAdvisee() {
+	void Advisor::addAdvisee() {
 
 		//code will go here
 	}
@@ -126,7 +129,7 @@ public:
 	 *  Don't actually delete student's data jus remove them from
 	 *  advisee list
 	 */
-	void removeAdvisee() {
+	void Advisor::removeAdvisee() {
 
 		//code wil go here
 	}
@@ -134,7 +137,7 @@ public:
 	/*
 	 * Moves students specified by major
 	 */
-	void moveAdvisees() {
+	void Advisor::moveAdvisees() {
 
 		//code will go here
 	}
@@ -144,7 +147,7 @@ public:
 	 *  Should only display name, ID and Advisor
 	 *  Do not use printAdviseeList()
 	 */
-	void searchNonAdvisee(vector<Student> allStudents) {
+	void Advisor::searchNonAdvisee(vector<Student> allStudents) {
 
 		//code will go here
 	}
@@ -152,7 +155,7 @@ public:
 	/*
 	 *  Prints detailed list of all advisors
 	 */
-	static void printAdvisorList() {
+	void Advisor::printAdvisorList() {
 
 		//code will go here
 	}
@@ -161,8 +164,7 @@ public:
 	 *  Prompts for major.
 	 *  Displays count and average GPA
 	 */
-	void showMajorDetails() {
+	void Advisor::showMajorDetails() {
 
 		//code will go here
 	}
-};
