@@ -218,7 +218,7 @@ int main() {
                 			Advisors[userIndex].moveAdvisees();
                 			break;
             			case 7:
-                			Advisors[userIndex].searchNonAdvisee();
+                			Advisors[userIndex].searchNonAdvisee(Students);
                 			break;
             			case 8:
                 			Advisors[userIndex].printAdviseeList();
