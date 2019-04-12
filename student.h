@@ -4,15 +4,18 @@
 #include<string.h>
 
 using namespace std;
-class Student: public User {
+class Student: public User  {
 private:
-	string name;
+	string firstName;
+	string lastName;
 	string major;
 	int TotalHours;
 	double GPA;
 	string ID;
+	string Notes;
 public:
-	Student(string a, string b, int c, double d, string e);
+	Student(string a, string b, string c, int d, double e, string f, string g);
+	string GetID();
 	void menu();
 	void view();
 	void update();
