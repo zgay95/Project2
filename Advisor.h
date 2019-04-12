@@ -35,7 +35,7 @@ public:
 	void addAdvisee();
 	void removeAdvisee();
 	void moveAdvisees();
-	void searchNonAdvisee();
+	void searchNonAdvisee(vector<Student> allStudents);
 	void printAdvisorList();
 	void showMajorDetails();
 };
