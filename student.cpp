@@ -17,8 +17,9 @@ int readline(char a[], int b) {
 	return i;
 }
 
-Student::Student(string a, string b, string c, int d, double e, string f,string g) {
+Student::Student(string a, string p, string b, string c, int d, double e, string f,string g) {
 	firstName = a;
+	password = p;
 	lastName = b;
 	major = c;
 	TotalHours = d;
@@ -28,6 +29,27 @@ Student::Student(string a, string b, string c, int d, double e, string f,string 
 }
 string Student::GetID() {
 	return this->ID;
+}
+string Student::GetPassword() {
+	return this->password;
+}
+string Student::GetFirstName() {
+	return this->firstName;
+}
+string Student::GetLastName() {
+	return this->lastName;
+}
+string Student::GetMajor() {
+	return this->major;
+}
+string Student::GetTotalHours() {
+	return to_string(this->TotalHours);
+}
+string Student::GetGPA() {
+	return to_string(this->GPA);
+}
+string Student::GetNotes() {
+	return this->Notes;
 }
 void Student::view() {
 	cout << firstName << " " << lastName << "`s major: " << major << "\nTotal Hours: " << TotalHours << "\nGPA: " << GPA << endl;
