@@ -13,6 +13,6 @@ A 'readme.txt' short report to indicate where in your program code (i.e., which 
 
 -Function template
 
--Lambda expression
+-Lambda expression (Done in main())
 
--Exception handling
+-Exception handling (Done in User class)
