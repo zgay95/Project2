@@ -44,7 +44,7 @@ public:
 	void removeAdvisee();
 	void moveAdvisees();
 	void searchNonAdvisee(vector<Student> allStudents);
-	void printAdvisorList();
+	void printAdvisorList(vector<Advisor> allAdvisors);
 	void showMajorDetails();
 };
 #endif /* Advisor_h */
