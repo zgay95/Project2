@@ -2,9 +2,10 @@
 #define STUDENT_H
 #include<iostream>
 #include<string.h>
+#include "User.h"
 
 using namespace std;
-class Student: public User  {
+class Student : User  {
 private:
 	string firstName;
 	string lastName;
@@ -12,10 +13,18 @@ private:
 	int TotalHours;
 	double GPA;
 	string ID;
+	string password;
 	string Notes;
 public:
-	Student(string a, string b, string c, int d, double e, string f, string g);
+	Student(string a, string p, string b, string c, int d, double e, string f, string g);
 	string GetID();
+	string GetPassword();
+	string GetFirstName();
+	string GetLastName();
+	string GetMajor();
+	string GetTotalHours();
+	string GetGPA();
+	string GetNotes();
 	void menu();
 	void view();
 	void update();
