@@ -12,7 +12,7 @@ A 'readme.txt' short report to indicate where in your program code (i.e., which 
 
 -STL algorithms (at least two)
 
--Function template
+-Function template (Done in Advisor class)
 
 -Lambda expression (Done in main())
 
