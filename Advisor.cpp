@@ -12,6 +12,15 @@
 #include "Student.h"
 
 using namespace std;
+	const char separator = ' ';
+	const int nameWidth = 16;
+	const int numWidth = 10;
+
+	template<typename T> 
+	void printElement(T t, const int& width)
+	{
+	cout << left << setw(width) << setfill(separator) << t;
+	}
 	/* Creates advisor instances, 
 	*  loads data passed into 
 	*  private fields to use in other functions
@@ -178,9 +187,17 @@ using namespace std;
 	/*
 	 *  Prints detailed list of all advisors
 	 */
-	void Advisor::printAdvisorList() {
-
-		//code will go here
+	void Advisor::printAdvisorList(vector<Advisor> allAdvisors) {
+		cout << '\n';
+		for (size_t i = 0; i < allAdvisors.size(); i++)
+		{
+			printElement(allAdvisors[i].GetFirstName, nameWidth);
+			printElement(allAdvisors[i].GetLastName, nameWidth);
+			printElement(allAdvisors[i].GetRoom, numWidth);
+			printElement(allAdvisors[i].GetPhoneNum, numWidth);
+			cout << endl;
+		}
+		cout << '\n';
 	}
 
 	/*
@@ -188,6 +205,36 @@ using namespace std;
 	 *  Displays count and average GPA
 	 */
 	void Advisor::showMajorDetails() {
+		string major;
+		double totalGPA = 0.0, AveGPA = 0.0;
+		int count = 0;
+		cout << "\n Enter major (ex: CE,CS,CH,IE,EE,ME): ";
+		getline(cin, major);
 
-		//code will go here
+		if (major.length() < 3)
+		{
+			for (size_t i = 0; i < this->advisees.size(); i++)
+			{
+				if (major == this->advisees[i].GetMajor())
+				{
+					totalGPA += stod(advisees[i].GetGPA());
+					count++;
+				}
+			}
+			AveGPA = (totalGPA/count);
+
+			if (count != 0)
+			{
+				cout << "Total count of Advisees with " << major << " : " << count << endl;
+				cout << "Average GPA: " << AveGPA;
+			}
+			else
+			{
+				cout << "No Advisees with " << major << " major.\n";
+			}
+		}
+		else
+		{
+			cout << "Please enter a valid major.\n";
+		}
 	}
