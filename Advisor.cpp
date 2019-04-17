@@ -16,13 +16,46 @@ using namespace std;
 	*  loads data passed into 
 	*  private fields to use in other functions
 	*/
-	Advisor::Advisor(string ID, string fname, string lname, string room, string phone, vector<Student> ad) {
+	Advisor::Advisor(string ID, string pw, string fname, string lname, string room, string phone, vector<Student> ad) {
 		this->ID = ID;
+		this->password = pw;
 		this->fName = fname;
 		this->lName = lname;
 		this->room = room;
 		this->phone_num = phone;
 		this->advisees = ad;
+	}
+	string Advisor::GetID() {
+		return this->ID;
+	}
+	string Advisor::GetPassword() {
+		return this->password;
+	}
+	string Advisor::GetFirstName() {
+		return this->fName;
+	}
+	string Advisor::GetLastName() {
+		return this->lName;
+	}
+	string Advisor::GetRoom() {
+		return this->room;
+	}
+	string Advisor::GetPhoneNum() {
+		return this->phone_num;
+	}
+	string Advisor::GetAdvisees() {
+		string temp;
+
+		for (size_t i = 0; i < this->advisees.size(); i++)
+		{
+			temp += this->advisees[i].GetID();
+			temp += ",";
+		}
+		if (temp!= "")
+		{
+			temp.pop_back();
+		}
+		return temp;
 	}
 	/*
 	 *  Displays the advisor menu.
@@ -45,18 +78,8 @@ using namespace std;
 	}
 
 	/*
-	 *  main.cpp should call this function and pass int value
-	 *  entered by the user.
-	 *  Advisor handles everything from here and returns to main.cpp
-	 *  when task is complete
-	 */
-	void Advisor::handleMenuSelection(int selection) {
-
-	}
-
-	/*
 	 *  Displays detail list of students in given vector.
-	 *  Should be called by printMenu() to view all advisees
+	 *  Should be called by main.cpp to view all advisees
 	 *  and search() to only show search results
 	 */
 	void Advisor::printAdviseeList() {
@@ -84,7 +107,7 @@ using namespace std;
 		cout << " [0] Back/n/n";
 		cout << "===========================/n/n";
 
-		int selection;
+		int selection = 0;
 		//I plan to make a method somewhere (maybe in User) that can
 		//get user input and validate based on a given range
 		//selection = getMenuInput(0, 2);
