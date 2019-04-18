@@ -31,5 +31,6 @@ public:
 	void ChangeMajor(string f);
 	void ChangeGPA(double g);
 	void changeTotalHours(int k);
+	void SetNote(string Note);
 };
 #endif 
