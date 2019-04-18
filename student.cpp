@@ -131,3 +131,7 @@ void Student::changeTotalHours(int k) {
 		cout << InvalidHour << endl;
 	}
 }
+
+void Student::SetNote(string Note) {
+	this->Notes = Note;
+}
