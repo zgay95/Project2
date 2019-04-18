@@ -1,10 +1,10 @@
-ST00,Attended Career Expo
-ST01,Attended Engineering Expo
-ST02,Delayed Graduation Date
-ST03,Currently Enrolled in Internship
-ST04,Off-Campus Student
-ST05,Student still owes tuition
-ST06,Has a lot of homework
-ST07,Always late to class
-ST08,Never attends class
-ST09,On Student Council 
+ST00,(AD00 3/12/2019) ST00 Attended Career Expo
+ST01,(AD09 3/11/2019) ST01 Attended Engineering Expo
+ST02,(AD08 4/12/2019) ST02 Delayed Graduation Date
+ST03,(AD04 3/18/2019) ST03 Currently Enrolled in Internship
+ST04,(AD05 3/22/2019) ST04 Off-Campus Student
+ST05,(AD09 3/15/2019) ST05 Student still owes tuition
+ST06,(AD02 2/12/2019) ST06 Has a lot of homework
+ST07,(AD00 4/12/2019) ST07 Always late to class
+ST08,(AD06 3/10/2019) ST08 Never attends class
+ST09,(AD06 3/30/2019) ST09 On Student Council
