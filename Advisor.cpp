@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <ctime>
 #include "Advisor.h"
 #include "Student.h"
 
@@ -137,13 +138,66 @@ using namespace std;
 	}
 
 	void Advisor::showNotes() {
+		string StudentID;
+		int flag = 0;
+		cout << "\nEnter a Student ID: ";
+		getline(cin,StudentID);
 
-		//code will go here
+		for (size_t i = 0; i < advisees.size(); i++)
+		{
+			if ( advisees[i].GetID() == StudentID )
+			{
+				cout << advisees[i].GetNotes() << endl;
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 0)
+		{
+			cout << "\nNo student found under your advisees.\n";
+		}	
 	}
 
 	void Advisor::addNote() {
+		string StudentID;
+		int flag = 0;
+		cout << "\nEnter a Student ID: ";
+		getline(cin, StudentID);
 
-		//code will go here
+		for (size_t i = 0; i < advisees.size(); i++)
+		{
+			if (advisees[i].GetID() == StudentID)
+			{
+				//Below code gets the current date on the system
+				time_t now = time(0);
+				tm *ltm = localtime(&now);
+				int Year = (1970 + ltm->tm_year);
+				int Month =(1 + ltm->tm_mon);
+				int Day= (ltm->tm_mday);
+				//create header for note
+				string date = to_string(Month) + "/" + to_string(Day) + "/" + to_string(Year);
+				string header = "(" + this->GetID() + " " + date + ") " + advisees[i].GetID() + " ";
+				string InputNote = "";
+				cout << "\nEnter Note for Student: ";
+				getline(cin, InputNote);
+
+				if (InputNote == "")
+				{
+					cout << "\n No Note entered.\n";
+				}
+				else
+				{
+					string Note = header + InputNote;
+					advisees[i].SetNote(Note);
+				}
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 0)
+		{
+			cout << "\nNo student found under your advisees.\n";
+		}
 	}
 
 	/*
