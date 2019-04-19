@@ -17,6 +17,9 @@ class User {
 private:
 	string userID;
 	string password;
-
+public:
+	User(string a, string b);
+	string GetuserID();
+	string Getpasswork();
 };
 #endif 
