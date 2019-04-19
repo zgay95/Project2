@@ -1,6 +1,7 @@
 #include<iostream>
 #include<string>
 #include "Student.h"
+#include"User.h"
 
 using namespace std;
 
@@ -17,21 +18,21 @@ int readline(char a[], int b) {
 	return i;
 }
 
-Student::Student(string a, string p, string b, string c, int d, double e, string f,string g) {
+Student::Student(string a, string p, string b, string c, int d, double e, string f, string g):User(f,p) {
 	firstName = a;
-	password = p;
+	//password = p;
 	lastName = b;
 	major = c;
 	TotalHours = d;
 	GPA = e;
-	ID = f;
+	//ID = f;
 	Notes = g;
 }
 string Student::GetID() {
-	return this->ID;
+	return User::GetuserID();
 }
 string Student::GetPassword() {
-	return this->password;
+	return User::Getpassword();
 }
 string Student::GetFirstName() {
 	return this->firstName;
@@ -52,7 +53,7 @@ string Student::GetNotes() {
 	return this->Notes;
 }
 void Student::view() {
-	cout << "Student ID: " << ID << "\n" << firstName << " " << lastName << "`s major: " << major << "\nTotal Hours: " << TotalHours << "\nGPA: " << GPA << endl;
+	cout << "Student ID: " << User::GetuserID() << "\n" << firstName << " " << lastName << "`s major: " << major << "\nTotal Hours: " << TotalHours << "\nGPA: " << GPA << endl;
 }
 void Student::menu() {
 	cout << "========== Menu ==========\n\n0-View advisor information\n1-View information\n2-Update information\n3-Exit\n\n==========================\n" << endl;
