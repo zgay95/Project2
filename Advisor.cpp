@@ -105,14 +105,92 @@ using namespace std;
 	}
 
 	/*
-	 *  Displays detail list of students in given vector.
-	 *  Should be called by main.cpp to view all advisees
-	 *  and search() to only show search results
+	 *  Displays detail list of students in given vector
 	 */
-	void Advisor::printAdviseeList() {
+	void Advisor::printAdviseeList(vector<Student> students) {
 
-		//code will go here
-	}
+        if (students.size() == 0) {
+            
+            cout << "\nNo Advisees to show.\n";
+            return;
+        }
+        
+        cout << left << setw(8) << "ID";
+        cout << left << setw(nameWidth + 4) << "Name";
+        cout << left << setw(6) << "Major";
+        cout << left << setw(11) << "Total Hours\n";
+        
+        for (int i = 0; i < students.size(); i++) {
+            
+            cout << left << setw(8) << students[i].GetID();
+            cout << left << setw(nameWidth + 4) << students[i].GetFirstName() << " " << students[i].GetLastName();
+            cout << left << setw(6) << students[i].GetMajor();
+            cout << right << setw(7) << students[i].GetTotalHours() << "\n";
+        }
+        
+        cout << "\n";
+    }
+    /*Displays destail list of all students*/
+    void Advisor::printAdviseeList() {
+        
+        cout << "\n========== Advisees ==========\n\n";
+        cout << " [1] Sort by ID\n";
+        cout << " [2] Sort by Major\n";
+        cout << " [3] Sort by Number of Hours\n";
+        cout << " [0] Back\n\n";
+        cout << "================================\n\n";
+        
+        bool selectionIsValid;
+        int selection;
+        //Loop until user enters a valid selction
+        do {
+            cout << "Enter selection: ";
+            cin >> selection;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            if (selection >= 0 && selection <= 3) {
+                selectionIsValid = true;
+            }
+            else {
+                selectionIsValid = false;
+                cout << "Invalid entry! Try again...\n";
+            }
+        } while (!selectionIsValid);
+        
+        switch (selection) {
+                
+            case 1:
+                sort(advisees.begin(), advisees.end() + advisees.size(), sortByID);
+                break;
+            case 2:
+                sort(advisees.begin(), advisees.end() + advisees.size(), sortByMajor);
+                break;
+            case 3:
+                sort(advisees.begin(), advisees.end() + advisees.size(), sortByHours);
+                break;
+            case 0:
+                return;
+            default:
+                return;
+        }
+        
+        printAdviseeList(advisees);
+    }
+
+    /* Functions for sorting */
+    bool Advisor::sortByID(Student left, Student right) {
+    
+        return (left.GetID().compare(right.GetID()) <= 0);
+    }
+    bool Advisor::sortByMajor(Student left, Student right) {
+        
+        return (left.GetMajor().compare(right.GetMajor()) <= 0);
+    }
+    bool Advisor::sortByHours(Student left, Student right) {
+    
+        return (left.GetTotalHours().compare(right.GetTotalHours()) <= 0);
+    }
+
 
 	/*
 	 *  Prompts and conducts search.
@@ -120,9 +198,103 @@ using namespace std;
 	 */
 	void Advisor::search() {
 
-		//code will go here
+        vector<Student> searchResults;
+        string queue;
+        int min, max, totalHours;
+        int selection;
+        
+        cout << "\n========== Search ==========\n\n";
+        cout << " [1] Search by ID\n";
+        cout << " [2] Search by Major\n";
+        cout << " [3] Search by Range of Hours\n";
+        cout << " [4] Search by Major and Range of Hours\n";
+        cout << " [0] Back\n\n";
+        cout << "==============================\n\n";
+        
+        
+        bool selectionIsValid;
+        //Loop until user enters a valid selction
+        do {
+            cout << "Enter selection: ";
+            cin >> selection;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            if (selection >= 0 && selection <= 4) {
+                selectionIsValid = true;
+            }
+            else {
+                selectionIsValid = false;
+                cout << "Invalid entry! Try again...\n";
+            }
+        } while (!selectionIsValid);
+        
+        switch (selection) {
+                
+            case 1:
+                cout << "Enter ID: ";
+                cin >> queue;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                for (int i = 0; i < advisees.size(); i++) {
+                    if (advisees[i].GetID().compare(queue) == 0) {
+                        searchResults.push_back(advisees[i]);
+                    }
+                }
+                break;
+            case 2:
+                cout << "Enter Major: ";
+                cin >> queue;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                for (int i = 0; i < advisees.size(); i++) {
+                    if (advisees[i].GetMajor().compare(queue) == 0) {
+                        searchResults.push_back(advisees[i]);
+                    }
+                }
+                break;
+            case 3:
+                cout << "Enter min hours: ";
+                cin >> min;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Enter max hours: ";
+                cin >> max;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                for (int i = 0; i < advisees.size(); i++) {
+                    totalHours = stoi(advisees[i].GetTotalHours());
+                    if (min <= totalHours && max >= totalHours) {
+                        searchResults.push_back(advisees[i]);
+                    }
+                }
+                break;
+            case 4:
+                cout << "Enter Major: ";
+                cin >> queue;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Enter min hours: ";
+                cin >> min;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Enter max hours: ";
+                cin >> max;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');                for (int i = 0; i < advisees.size(); i++) {
+                    totalHours = stoi(advisees[i].GetTotalHours());
+                    if (min <= totalHours && max >= totalHours && advisees[i].GetMajor().compare(queue) == 0) {
+                        searchResults.push_back(advisees[i]);
+                    }
+                }
+                break;
+            case 0:
+                return;
+            default:
+                return;
+        }
+        
+        printAdviseeList(searchResults);
 	}
-
 	/*
 	 *  Handles input
 	 */
@@ -307,7 +479,30 @@ using namespace std;
 	 */
 	void Advisor::searchNonAdvisee(vector<Student> allStudents) {
 
-		//code will go here
+        string queue;
+        int index;
+        
+        cout << "Enter ID of student: ";
+        cin >> queue;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        
+        for (index = 0; index < allStudents.size(); index++) {
+            
+            if (allStudents[index].GetID().compare(queue) == 0 ) {
+                break;
+            }
+        }
+        
+        if (index == allStudents.size()) {
+            cout << "No student found.\n\n";
+            return;
+        }
+        
+        cout << "\nResult found:\n";
+        cout << allStudents[index].GetID() << " ";
+        cout << allStudents[index].GetFirstName() << " " << allStudents[index].GetLastName();
+        cout << "\nCurrent advisor: I'll put this part in\n\n";
 	}
 
 	/*
