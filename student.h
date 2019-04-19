@@ -5,7 +5,7 @@
 #include "User.h"
 
 using namespace std;
-class Student : User  {
+class Student : public User {
 private:
 	string firstName;
 	string lastName;
@@ -16,7 +16,7 @@ private:
 	string password;
 	string Notes;
 public:
-	Student(string a, string p, string b, string c, int d, double e, string f, string g);
+	Student(string a, string p, string b, string c, int d, double e, string f, string g) :User(a, b) {};
 	string GetID();
 	string GetPassword();
 	string GetFirstName();
