@@ -77,7 +77,7 @@ using namespace std;
 
 		for (size_t i = 0; i < advisees.size(); i++)
 		{
-			if (StudentID == advisees[i].GetID())
+			if ((StudentID).compare(advisees[i].GetID())==0)
 			{
 				return true;
 			}
@@ -164,7 +164,7 @@ using namespace std;
 
 		for (size_t i = 0; i < advisees.size(); i++)
 		{
-			if ( advisees[i].GetID() == StudentID )
+			if ( (advisees[i].GetID()).compare(StudentID)==0 )
 			{
 				cout << advisees[i].GetNotes() << endl;
 				flag = 1;
@@ -185,7 +185,7 @@ using namespace std;
 
 		for (size_t i = 0; i < advisees.size(); i++)
 		{
-			if (advisees[i].GetID() == StudentID)
+			if ((advisees[i].GetID()).compare(StudentID)==0)
 			{
 				//Below code gets the current date on the system
 				time_t now = time(0);
@@ -341,7 +341,7 @@ using namespace std;
 		{
 			for (size_t i = 0; i < this->advisees.size(); i++)
 			{
-				if (major == this->advisees[i].GetMajor())
+				if (major.compare(this->advisees[i].GetMajor())==0)
 				{
 					totalGPA += stod(advisees[i].GetGPA());
 					count++;
