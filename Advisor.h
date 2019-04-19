@@ -34,6 +34,7 @@ public:
 	string GetRoom();
 	string GetPhoneNum();
 	string GetAdvisees();
+	bool SearchStudent(string StudentID);
 	void printMenu();
 	void printAdviseeList();
 	void search();
