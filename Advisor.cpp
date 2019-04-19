@@ -224,8 +224,37 @@ using namespace std;
 	 *  Search for student and handle adding them
 	 */
 	void Advisor::addAdvisee() {
-
-		//code will go here
+	string id;
+	char c;
+	int i = 0;
+	while (i == 0) {
+		cout << "Plase enter student ID: ";
+		cin >> id;
+		try {
+			for (Student a : /*Check if the student exists*/) {
+				if (id.compare(a.GetID()) == 0) {
+					i = 1;
+					if (/*The student already have an advisor*/)
+					{
+						i = 2;
+					}
+					else {
+						cout << "Add " << a.GetID << " " << a.GetFirstName << " " << a.GetLastName << "(y/n) ?";
+						cin >> c;
+						if (c == 'y' || c == 'Y')
+							advisees.push_back(a);
+					}
+				}
+			}
+			if (i == 0)
+				throw "<ERROR> No such student!";
+			if (i == 2)
+				throw "***DOUBLE ADVISING REJECTED";
+		}
+		catch (const char* StudentNotFound) {
+			cout << StudentNotFound << endl;
+		}
+	}
 	}
 
 	/*
@@ -235,8 +264,32 @@ using namespace std;
 	 *  advisee list
 	 */
 	void Advisor::removeAdvisee() {
-
-		//code wil go here
+	int i = 0,k=0;
+	string id;
+	char c;
+	while (i == 0) {
+		cout << "Plase enter student ID: ";
+		cin >> id;
+		try {
+			for (Student a:advisees) {
+				if (id.compare(a.GetID) == 0) {
+					cout << "Remove " << a.GetID << " " << a.GetFirstName << " " << a.GetLastName << "(y/n) ? ";
+					cin >> c;
+					i = 1;
+					if (c == 'y' || c == 'Y') {
+						advisees.erase(advisees.begin() + k);
+						cout << "Removed " << a.GetID << " " << a.GetFirstName << " " << a.GetLastName << endl;
+					}
+				}
+				k++;
+			}
+			if (i == 0)
+				throw "<ERROR> No such student!";
+		}
+		catch (const char* InvalidID) {
+			cout << InvalidID << endl;
+		}
+	}
 	}
 
 	/*
