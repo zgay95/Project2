@@ -36,7 +36,11 @@ public:
 	string GetAdvisees();
 	bool SearchStudent(string StudentID);
 	void printMenu();
+	void printAdviseeList(vector<Student> students);
 	void printAdviseeList();
+    	bool static sortByID(Student left, Student right);
+    	bool static sortByMajor(Student left, Student right);
+    	bool static sortByHours(Student left, Student right);
 	void search();
 	void printNotesMenu();
 	void showNotes();
