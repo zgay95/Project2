@@ -20,6 +20,6 @@ private:
 public:
 	User(string a, string b);
 	string GetuserID();
-	string Getpasswork();
+	string Getpassword();
 };
 #endif 
