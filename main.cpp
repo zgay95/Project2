@@ -13,82 +13,6 @@ using namespace std;
 #define AdvisorData  "AdvisorData.txt"		// AdvisorID, Password, FirstName, LastName, Phone#, Room#
 #define AdviseeData  "AdviseeData.txt"		// AdvisorID, StudentID, StudentID, StudentID, ..., ..., ...
 
-/*
-*  Displays the top level menu
-*/
-void printLoginMenu() {
-
-	cout << "========== Menu ==========\n\n";
-	cout << " [1] Advisor Login\n";
-	cout << " [2] Student Login\n";
-	cout << " [0] Quit\n\n";
-	cout << "==========================\n\n";
-}
-
-/*
-* Returns index of user
-*/
-int login(vector<User>* users) {
-
-	string userID, password;
-	bool userFound;
-	int index;
-
-	do {
-		userFound = false;
-		cout << "\nUser ID: ";
-		cin >> userID;
-
-		for (index = 0; index < users.size(); index++) {
-
-			if (userID.compare((*users)[index].GetID() == 0) {
-				break;
-			}
-		}
-
-		if (index < users.size()) {
-			userFound = true;
-		}
-		else {
-			cout << "User not found, please try again...\n";
-		}
-	} while (!userFound);
-
-	cout << "Password: ";
-	cin >> password;
-
-	while (password.compare((*users)[index].getPassword() != 0) {
-		cout << "Incorrect password, please try again...\n\n";
-	}
-	return index;
-}
-
-/*
-* Input validation for numbered menu options
-* returns int in range 0 to upperLimit (inclusive)
-*/
-int getIntSelection(int upperLimit) {
-
-	int selection;
-	bool selectionIsValid;
-
-	do {
-		cout << "Enter selection: ";
-		cin >> selection;
-		if (selection < 0 || selection > upperLimit) {
-			selectionIsValid = false;
-			cout << "Invalid entry! Try again...\n";
-		}
-		else {
-			selectionIsValid = true;
-		}
-	} while (!selectionIsValid);
-
-	return selection;
-}
-
-
-
 int main() {
 	vector <Student> Students;
 	vector <Advisor> Advisors;
@@ -171,82 +95,207 @@ int main() {
 		Advisor Advisor(ID,password,fName,lName,room,phone_num, advisees);
 		Advisors.push_back(Advisor);
 	}
+	
+	bool ProgramExit = false;
 
+	//Main loop 
+	while (ProgramExit == false)
+	{
+		int LoggedIn = 0;
+		int selection = 0;
+		unsigned int index = 0;
 
-	/*Ask for user id and password here*/
+	/*Login loop*/
+	while (LoggedIn == 0)
+	{	//display top level menu
+		cout << "========== Menu ==========\n\n";
+		cout << " [1] Advisor Login\n";
+		cout << " [2] Student Login\n";
+		cout << " [0] Quit\n\n";
+		cout << "==========================\n\n";
 
+		bool selectionIsValid;
+		//Loop until user enters a valid selction
+		do {
+			cout << "Enter selection: ";
+			cin >> selection;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			if (selection >= 0 && selection <= 2) {
+				selectionIsValid = true;
+			}
+			else {
+				selectionIsValid = false;
+				cout << "Invalid entry! Try again...\n";
+			}
+		} while (!selectionIsValid);
 
-	/*log in*/
+		string userID, password;
+		bool userFound = false;
 
-	printLoginMenu();
-	int userSelection = getIntSelection(2);
+		switch (selection) {
+		case 1:
+			while (!userFound) {
+				cout << "\nUser ID: ";
+				getline(cin, userID);
 
-	int userIndex;
+				for (index = 0; index < Advisors.size(); index++) {
 
-	switch (userSelection) {
-	case 1:
-		userIndex = login(Advisors);
-		break;
-	case 2:
-		userIndex = login(Students);
-		break;
-	case 0:
-		return 0;
-	default:
-		return 1;
+					if (Advisors[index].GetID() == userID) {
+						break;
+					}
+				}
+
+				if (index < Advisors.size()) {
+					userFound = true;
+				}
+				else {
+					cout << "User not found, please try again...\n";
+				}
+			} 
+
+			cout << "Password: ";
+			getline(cin, password);
+
+			if (Advisors[index].GetPassword() != password)
+			{
+				cout << "Incorrect password, please try again...\n\n";
+			}
+			else
+			{
+				cout << "Login Successful.\n\n";
+				LoggedIn = 1;
+			}
+
+			break;
+		case 2:
+			while (!userFound) {
+				userFound = false;
+				cout << "\nUser ID: ";
+				getline(cin, userID);
+
+				for (index = 0; index < Students.size(); index++) {
+
+					if (Students[index].GetID() == userID) {
+						break;
+					}
+				}
+
+				if (index < Students.size()) {
+					userFound = true;
+				}
+				else {
+					cout << "User not found, please try again...\n";
+				}
+			} 
+
+			cout << "Password: ";
+			getline(cin, password);
+
+			if (Students[index].GetPassword() != password)
+			{
+				cout << "Incorrect password, please try again...\n\n";
+			}
+			else
+			{
+				cout << "Login Successful.\n";
+				LoggedIn = 1;
+			}
+
+			break;
+		case 0:
+			LoggedIn = 2;
+			break;
+		default:
+			cout << "Error: Input invalid\n";
+		}
 	}
-
 	/*the actual program */
 
-	int menuSelection = 1;
+	int AdvisormenuSelection = 0;
+	int StudentmenuSelection = 0;
+	int ExitFlag = 0;
 
-	while (menuSelection != 0) {
+	while (ExitFlag == 0) {
 
-		if (userSelection == 1) {
-			Advisor.printMenu();
-			menuSelection = getIntSelection(9);
-			switch (menuSelection) {
+		if (selection == 1) {
+			Advisors[index].printMenu();
+			cout << "Enter selection: ";
+			cin >> AdvisormenuSelection;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			switch (AdvisormenuSelection) {
 			case 1:
-				Advisors[userIndex].printAdviseeList();
+				Advisors[index].printAdviseeList();
 				break;
 			case 2:
-				Advisors[userIndex].search();
+				Advisors[index].search();
 				break;
 			case 3:
-				Advisors[userIndex].printNotesMenu();
+				Advisors[index].printNotesMenu();
 				break;
 			case 4:
-				Advisors[userIndex].addAdvisee();
+				Advisors[index].addAdvisee();
 				break;
 			case 5:
-				Advisors[userIndex].removeAdvisee();
+				Advisors[index].removeAdvisee();
 				break;
 			case 6:
-				Advisors[userIndex].moveAdvisees();
+				Advisors[index].moveAdvisees();
 				break;
 			case 7:
-				Advisors[userIndex].searchNonAdvisee(Students);
+				Advisors[index].searchNonAdvisee(Students);
 				break;
 			case 8:
-				Advisors[userIndex].printAdviseeList();
+				Advisors[index].printAdvisorList(Advisors);
 				break;
 			case 9:
-				Advisors[userIndex].showMajorDetails();
+				Advisors[index].showMajorDetails();
 				break;
 			case 0:
-				return;
+				ExitFlag = 1;
 				break;
 			default:
 				cout << "Error: Input invalid\n";
-			}
+				}
+		}else if (selection == 2){
+				Students[index].menu();
+				cout << "Enter selection: ";
+				cin >> StudentmenuSelection;
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				switch (StudentmenuSelection) {
+				case 0: //View advisor data
+					for (size_t i = 0; i < Advisors.size(); i++)
+					{
+						if (Advisors[i].SearchStudent(Students[i].GetID()))
+						{
+							cout << "Advisor Infomation: " << endl;
+							cout << "ID: " << Advisors[i].GetID() << endl;
+							cout << "Name: " << Advisors[i].GetFirstName() << " " << Advisors[i].GetLastName() << endl;
+							cout << "Room#: " << Advisors[i].GetRoom() << endl;
+							cout << "Phone#: " << Advisors[i].GetPhoneNum() << endl;
+						}
+					}
+					break;
+				case 1: Students[index].view();
+					break;
+				case 2: Students[index].update();
+					break;
+				case 3:
+					ExitFlag = 1;
+					break;
+				default: cout << "Invalid option" << endl;
+				} 
 		}
-		else {
-			Student.printMenu();
-			menuSelection = getIntSelection(2);
-			Students[userIndex].menu();
+		else
+		{
+			ExitFlag = 1;
+			ProgramExit = true;
+			cout << "\nProgram Exiting...\n\n";
 		}
 	}
-
+	}
 
 	/* Format data into vetors to write back to files*/
 
