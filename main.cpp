@@ -47,7 +47,7 @@ int main() {
 		//search if student has notes
 		for (size_t i = 0; i < StudNotes.size(); i++)
 		{
-			if (StudNotes[i] == ID)
+			if ((StudNotes[i]).compare(ID)==0)
 			{
 				Notes = StudNotes[i+1];
 				break;
@@ -70,7 +70,7 @@ int main() {
 		//search advisees from student vector
 		for (size_t g = 0; g < visorAdvisee.size(); g++)
 		{
-			if (visorAdvisee[g] == ID)
+			if ((visorAdvisee[g]).compare(ID)==0)
 			{
 				while (ID[0] == 'A')
 				{	
@@ -141,7 +141,7 @@ int main() {
 
 				for (index = 0; index < Advisors.size(); index++) {
 
-					if (Advisors[index].GetID() == userID) {
+					if ((Advisors[index].GetID()).compare(userID)==0) {
 						break;
 					}
 				}
@@ -157,7 +157,7 @@ int main() {
 			cout << "Password: ";
 			getline(cin, password);
 
-			if (Advisors[index].GetPassword() != password)
+			if ((Advisors[index].GetPassword()).compare(password)!=0)
 			{
 				cout << "Incorrect password, please try again...\n\n";
 			}
@@ -176,7 +176,7 @@ int main() {
 
 				for (index = 0; index < Students.size(); index++) {
 
-					if (Students[index].GetID() == userID) {
+					if ((Students[index].GetID()).compare(userID)==0) {
 						break;
 					}
 				}
@@ -192,7 +192,7 @@ int main() {
 			cout << "Password: ";
 			getline(cin, password);
 
-			if (Students[index].GetPassword() != password)
+			if ((Students[index].GetPassword()).compare(password)!=0)
 			{
 				cout << "Incorrect password, please try again...\n\n";
 			}
