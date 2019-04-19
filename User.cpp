@@ -11,6 +11,6 @@ User::User(string a, string b) {
 string User::GetuserID() {
 	return userID;
 }
-string User::Getpasswork() {
+string User::Getpassword() {
 	return password;
 }
