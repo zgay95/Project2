@@ -4,8 +4,10 @@
 //
 //  Created by Jose Monge on 3/29/19.
 //
+#pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <vector>
 #include <ctime>
@@ -68,6 +70,21 @@ using namespace std;
 		return temp;
 	}
 	/*
+	 *  Search for student in advisee list, if foudn return true.
+	 *	This function is called from teh student menu to display advisor details
+	*/
+	bool Advisor::SearchStudent(string StudentID) {
+
+		for (size_t i = 0; i < advisees.size(); i++)
+		{
+			if (StudentID == advisees[i].GetID())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	/*
 	 *  Displays the advisor menu.
 	 *  Does not handle input
 	 */
@@ -111,29 +128,31 @@ using namespace std;
 	 */
 	void Advisor::printNotesMenu() {
 
-		cout << "========== Notes ==========\n\n";
+		cout << "\n========== Notes ==========\n\n";
 		cout << " [1] View Notes\n";
 		cout << " [2] New Note\n";
-		cout << " [0] Back/n/n";
-		cout << "===========================/n/n";
+		cout << " [0] Back\n\n";
+		cout << "===========================\n\n";
 
 		int selection = 0;
-		//I plan to make a method somewhere (maybe in User) that can
-		//get user input and validate based on a given range
-		//selection = getMenuInput(0, 2);
-
-		switch (selection) {
-		case 1:
-			showNotes();
-			break;
-		case 2:
-			addNote();
-			break;
-		case 0:
-			return;
-			break;
-		default:
-			"Error: input invalid\n";
+		while (selection < 3) {
+			cout << "Enter Selection: ";
+			cin >> selection;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			switch (selection) {
+			case 1:
+				showNotes();
+				break;
+			case 2:
+				addNote();
+				break;
+			case 0:
+				return;
+				break;
+			default:
+				"Error: input invalid\n";
+			}
 		}
 	}
 
@@ -245,10 +264,10 @@ using namespace std;
 		cout << '\n';
 		for (size_t i = 0; i < allAdvisors.size(); i++)
 		{
-			printElement(allAdvisors[i].GetFirstName, nameWidth);
-			printElement(allAdvisors[i].GetLastName, nameWidth);
-			printElement(allAdvisors[i].GetRoom, numWidth);
-			printElement(allAdvisors[i].GetPhoneNum, numWidth);
+			printElement(allAdvisors[i].GetFirstName(), nameWidth);
+			printElement(allAdvisors[i].GetLastName(), nameWidth);
+			printElement(allAdvisors[i].GetRoom(), numWidth);
+			printElement(allAdvisors[i].GetPhoneNum(), numWidth);
 			cout << endl;
 		}
 		cout << '\n';
