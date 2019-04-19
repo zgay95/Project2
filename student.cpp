@@ -52,7 +52,10 @@ string Student::GetNotes() {
 	return this->Notes;
 }
 void Student::view() {
-	cout << firstName << " " << lastName << "`s major: " << major << "\nTotal Hours: " << TotalHours << "\nGPA: " << GPA << endl;
+	cout << "Student ID: " << ID << "\n" << firstName << " " << lastName << "`s major: " << major << "\nTotal Hours: " << TotalHours << "\nGPA: " << GPA << endl;
+}
+void Student::menu() {
+	cout << "========== Menu ==========\n\n0-View advisor information\n1-View information\n2-Update information\n3-Exit\n\n==========================\n" << endl;
 }
 void Student::ChangeMajor(string f) {
 	major = f;
@@ -73,30 +76,17 @@ void Student::ChangeGPA(double g) {
 		cout << Invalidgpa << endl;
 	}
 }
-void Student::menu() {
-	int n = 0;
-	while (n != 3) {
-		cout << "1-View information\n2-Update information\n3-Exit" << endl;
-		cin >> n;
-		switch (n) {
-		case 1: Student::view();
-			break;
-		case 2: Student::update();
-			break;
-		case 3:
-			break;
-		default: cout << "Invalid option" << endl;
-		}
-	}
-}
 void Student::update() {
 	int n = 0, i, j, new_hours;
 	double new_GPA;
 	char a[100];
 	string new_major;
 	while (n != 4) {
-		cout << "1-GPA\n2-Major\n3-Total Hours\n4-Return" << endl;
+		cout << "========== Menu ==========\n\n1-Update GPA\n2-Update Major\n3-Update Total Hours\n4-Exit\n\n==========================\n\n" << endl;
+		cout << "Enter selection: ";
 		cin >> n;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		switch (n) {
 		case 1:cout << "New GPA: ";
 			cin >> new_GPA;
