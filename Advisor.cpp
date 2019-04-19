@@ -151,7 +151,7 @@ using namespace std;
 				return;
 				break;
 			default:
-				"Error: input invalid\n";
+				cout << "Error: input invalid\n";
 			}
 		}
 	}
