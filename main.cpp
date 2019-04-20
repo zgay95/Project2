@@ -7,7 +7,7 @@
 #include "Advisor.h"
 
 using namespace std;
-// Below is how the data is organized in the related file.
+											// Below is how the data is organized in the related file.
 #define StudentData  "StudentData.txt"		// StudentID, Password, FirstName, LastName, Major, GPA, HoursEarned
 #define StudentNotes "StudentNotesData.txt" // StudentID, Notes
 #define AdvisorData  "AdvisorData.txt"		// AdvisorID, Password, FirstName, LastName, Phone#, Room#
@@ -42,18 +42,18 @@ int main() {
 		string lName = StudData[i];			i++;
 		string major = StudData[i];			i++;
 		double GPA = stod(StudData[i]);		i++;
-		int TotalHours = stoi(StudData[i]);
+		int TotalHours = stoi(StudData[i]);	
 		string Notes = "";
 		//search if student has notes
 		for (size_t i = 0; i < StudNotes.size(); i++)
 		{
-			if ((StudNotes[i]).compare(ID) == 0)
+			if ((StudNotes[i]).compare(ID)==0)
 			{
-				Notes = StudNotes[i + 1];
+				Notes = StudNotes[i+1];
 				break;
 			}
 		}
-		Student Student(fName, password, lName, major, TotalHours, GPA, ID, Notes);
+		Student Student(fName,password,lName, major, TotalHours, GPA, ID, Notes);
 		Students.push_back(Student);
 	}
 	/*Create User/Advisor objects*/
@@ -64,16 +64,16 @@ int main() {
 		string fName = visorData[i];		i++;
 		string lName = visorData[i];		i++;
 		string phone_num = visorData[i];	i++;
-		string room = visorData[i];
+		string room = visorData[i];	
 		vector<Student> advisees;
 
 		//search advisees from student vector
 		for (size_t g = 0; g < visorAdvisee.size(); g++)
 		{
-			if ((visorAdvisee[g]).compare(ID) == 0)
+			if ((visorAdvisee[g]).compare(ID)==0)
 			{
 				while (ID[0] == 'A')
-				{
+				{	
 					if (g >= (visorAdvisee.size() - 1))
 					{
 						break;
@@ -92,10 +92,10 @@ int main() {
 			}
 		}
 
-		Advisor Advisor(ID, fName, lName, room, phone_num, advisees, password);
+		Advisor Advisor(ID,password,fName,lName,room,phone_num, advisees);
 		Advisors.push_back(Advisor);
 	}
-
+	
 	bool ProgramExit = false;
 
 	//Main loop 
@@ -105,161 +105,160 @@ int main() {
 		int selection = 0;
 		unsigned int index = 0;
 
-		/*Login loop*/
-		while (LoggedIn == 0)
-		{	//display top level menu
-			cout << "========== Menu ==========\n\n";
-			cout << " [1] Advisor Login\n";
-			cout << " [2] Student Login\n";
-			cout << " [0] Quit\n\n";
-			cout << "==========================\n\n";
+	/*Login loop*/
+	while (LoggedIn == 0)
+	{	//display top level menu
+		cout << "========== Menu ==========\n\n";
+		cout << " [1] Advisor Login\n";
+		cout << " [2] Student Login\n";
+		cout << " [0] Quit\n\n";
+		cout << "==========================\n\n";
 
-			bool selectionIsValid;
-			//Loop until user enters a valid selction
-			do {
-				cout << "Enter selection: ";
-				cin >> selection;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				if (selection >= 0 && selection <= 2) {
-					selectionIsValid = true;
+		bool selectionIsValid;
+		//Loop until user enters a valid selction
+		do {
+			cout << "Enter selection: ";
+			cin >> selection;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			if (selection >= 0 && selection <= 2) {
+				selectionIsValid = true;
+			}
+			else {
+				selectionIsValid = false;
+				cout << "Invalid entry! Try again...\n";
+			}
+		} while (!selectionIsValid);
+
+		string userID, password;
+		bool userFound = false;
+
+		switch (selection) {
+		case 1:
+			while (!userFound) {
+				cout << "\nUser ID: ";
+				getline(cin, userID);
+
+				for (index = 0; index < Advisors.size(); index++) {
+
+					if ((Advisors[index].GetID()).compare(userID)==0) {
+						break;
+					}
+				}
+
+				if (index < Advisors.size()) {
+					userFound = true;
 				}
 				else {
-					selectionIsValid = false;
-					cout << "Invalid entry! Try again...\n";
+					cout << "User not found, please try again...\n";
 				}
-			} while (!selectionIsValid);
+			} 
 
-			string userID, password;
-			bool userFound = false;
+			cout << "Password: ";
+			getline(cin, password);
 
-			switch (selection) {
+			if ((Advisors[index].GetPassword()).compare(password)!=0)
+			{
+				cout << "Incorrect password, please try again...\n\n";
+			}
+			else
+			{
+				cout << "Login Successful.\n\n";
+				LoggedIn = 1;
+			}
+
+			break;
+		case 2:
+			while (!userFound) {
+				userFound = false;
+				cout << "\nUser ID: ";
+				getline(cin, userID);
+
+				for (index = 0; index < Students.size(); index++) {
+
+					if ((Students[index].GetID()).compare(userID)==0) {
+						break;
+					}
+				}
+
+				if (index < Students.size()) {
+					userFound = true;
+				}
+				else {
+					cout << "User not found, please try again...\n";
+				}
+			} 
+
+			cout << "Password: ";
+			getline(cin, password);
+
+			if ((Students[index].GetPassword()).compare(password)!=0)
+			{
+				cout << "Incorrect password, please try again...\n\n";
+			}
+			else
+			{
+				cout << "Login Successful.\n";
+				LoggedIn = 1;
+			}
+
+			break;
+		case 0:
+			LoggedIn = 2;
+			break;
+		default:
+			cout << "Error: Input invalid\n";
+		}
+	}
+	/*the actual program */
+
+	int AdvisormenuSelection = 0;
+	int StudentmenuSelection = 0;
+	int ExitFlag = 0;
+
+	while (ExitFlag == 0) {
+
+		if (selection == 1) {
+			Advisors[index].printMenu();
+			cout << "Enter selection: ";
+			cin >> AdvisormenuSelection;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			switch (AdvisormenuSelection) {
 			case 1:
-				while (!userFound) {
-					cout << "\nUser ID: ";
-					getline(cin, userID);
-
-					for (index = 0; index < Advisors.size(); index++) {
-
-						if ((Advisors[index].GetID()).compare(userID) == 0) {
-							break;
-						}
-					}
-
-					if (index < Advisors.size()) {
-						userFound = true;
-					}
-					else {
-						cout << "User not found, please try again...\n";
-					}
-				}
-
-				cout << "Password: ";
-				getline(cin, password);
-
-				if ((Advisors[index].GetPassword()).compare(password) != 0)
-				{
-					cout << "Incorrect password, please try again...\n\n";
-				}
-				else
-				{
-					cout << "Login Successful.\n\n";
-					LoggedIn = 1;
-				}
-
+				Advisors[index].printAdviseeList();
 				break;
 			case 2:
-				while (!userFound) {
-					userFound = false;
-					cout << "\nUser ID: ";
-					getline(cin, userID);
-
-					for (index = 0; index < Students.size(); index++) {
-
-						if ((Students[index].GetID()).compare(userID) == 0) {
-							break;
-						}
-					}
-
-					if (index < Students.size()) {
-						userFound = true;
-					}
-					else {
-						cout << "User not found, please try again...\n";
-					}
-				}
-
-				cout << "Password: ";
-				getline(cin, password);
-
-				if ((Students[index].GetPassword()).compare(password) != 0)
-				{
-					cout << "Incorrect password, please try again...\n\n";
-				}
-				else
-				{
-					cout << "Login Successful.\n";
-					LoggedIn = 1;
-				}
-
+				Advisors[index].search();
+				break;
+			case 3:
+				Advisors[index].printNotesMenu();
+				break;
+			case 4:
+				Advisors[index].addAdvisee();
+				break;
+			case 5:
+				Advisors[index].removeAdvisee();
+				break;
+			case 6:
+				Advisors[index].moveAdvisees();
+				break;
+			case 7:
+				Advisors[index].searchNonAdvisee(Students);
+				break;
+			case 8:
+				Advisors[index].printAdvisorList(Advisors);
+				break;
+			case 9:
+				Advisors[index].showMajorDetails();
 				break;
 			case 0:
-				LoggedIn = 2;
+				ExitFlag = 1;
 				break;
 			default:
 				cout << "Error: Input invalid\n";
-			}
-		}
-		/*the actual program */
-
-		int AdvisormenuSelection = 0;
-		int StudentmenuSelection = 0;
-		int ExitFlag = 0;
-
-		while (ExitFlag == 0) {
-
-			if (selection == 1) {
-				Advisors[index].printMenu();
-				cout << "Enter selection: ";
-				cin >> AdvisormenuSelection;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				switch (AdvisormenuSelection) {
-				case 1:
-					Advisors[index].printAdviseeList();
-					break;
-				case 2:
-					Advisors[index].search();
-					break;
-				case 3:
-					Advisors[index].printNotesMenu();
-					break;
-				case 4:
-					Advisors[index].addAdvisee();
-					break;
-				case 5:
-					Advisors[index].removeAdvisee();
-					break;
-				case 6:
-					Advisors[index].moveAdvisees();
-					break;
-				case 7:
-					Advisors[index].searchNonAdvisee(Students);
-					break;
-				case 8:
-					Advisors[index].printAdvisorList(Advisors);
-					break;
-				case 9:
-					Advisors[index].showMajorDetails();
-					break;
-				case 0:
-					ExitFlag = 1;
-					break;
-				default:
-					cout << "Error: Input invalid\n";
 				}
-			}
-			else if (selection == 2) {
+		}else if (selection == 2){
 				Students[index].menu();
 				cout << "Enter selection: ";
 				cin >> StudentmenuSelection;
@@ -273,9 +272,9 @@ int main() {
 						{
 							cout << "Advisor Infomation: " << endl;
 							cout << "ID: " << Advisors[i].GetID() << endl;
-							cout << "Name: " << Advisors[i].getfname() << " " << Advisors[i].getlname() << endl;
-							cout << "Room#: " << Advisors[i].getroom() << endl;
-							cout << "Phone#: " << Advisors[i].getphone() << endl;
+							cout << "Name: " << Advisors[i].GetFirstName() << " " << Advisors[i].GetLastName() << endl;
+							cout << "Room#: " << Advisors[i].GetRoom() << endl;
+							cout << "Phone#: " << Advisors[i].GetPhoneNum() << endl;
 						}
 					}
 					break;
@@ -287,15 +286,15 @@ int main() {
 					ExitFlag = 1;
 					break;
 				default: cout << "Invalid option" << endl;
-				}
-			}
-			else
-			{
-				ExitFlag = 1;
-				ProgramExit = true;
-				cout << "\nProgram Exiting...\n\n";
-			}
+				} 
 		}
+		else
+		{
+			ExitFlag = 1;
+			ProgramExit = true;
+			cout << "\nProgram Exiting...\n\n";
+		}
+	}
 	}
 
 	/* Format data into vetors to write back to files*/
@@ -307,7 +306,7 @@ int main() {
 	{	//Asiign values from object into vector
 		string AB, CD = "";
 
-		string ID = Students[i].GetID();
+		string ID = Students[i].GetID();		
 		AB += ID;
 		CD += ID;
 		AB += ",";
@@ -352,7 +351,7 @@ int main() {
 
 	for (size_t i = 0; i < Advisors.size(); i++)
 	{	//Asiign values from object into vector
-		string AB, CD = "";
+		string AB, CD ="";
 
 		string ID = Advisors[i].GetID();
 		AB += ID;
@@ -364,24 +363,24 @@ int main() {
 		AB += password;
 		AB += ",";
 
-		string fName = Advisors[i].getfname();
+		string fName = Advisors[i].GetFirstName();
 		AB += fName;
 		AB += ",";
 
-		string lName = Advisors[i].getlname();
+		string lName = Advisors[i].GetLastName();
 		AB += lName;
 		AB += ",";
 
-		string phone = Advisors[i].getphone();
+		string phone = Advisors[i].GetPhoneNum();
 		AB += phone;
 		AB += ",";
 
-		string room = Advisors[i].getphone();
+		string room = Advisors[i].GetRoom();
 		AB += room;
 
-		vector<Student> advisees = Advisors[i].getad();
+		string advisees = Advisors[i].GetAdvisees();
 		//advisees.pop_back();
-		//CD += advisees;
+		CD += advisees;
 
 		writevisorData.push_back(AB);
 		writevisorAdvisee.push_back(CD);
