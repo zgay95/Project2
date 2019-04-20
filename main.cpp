@@ -235,7 +235,7 @@ int main() {
 				Advisors[index].printNotesMenu();
 				break;
 			case 4:
-				Advisors[index].addAdvisee();
+				Advisors[index].addAdvisee(Advisors,Students);
 				break;
 			case 5:
 				Advisors[index].removeAdvisee();
