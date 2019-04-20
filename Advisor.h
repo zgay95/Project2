@@ -26,7 +26,7 @@ private:
 	string phone_num;
 	vector<Student> advisees;
 public:
-	Advisor(string ID, string pw, string fname, string lname, string room, string phone, vector<Student> ad) :User(ID, pw) {};
+	Advisor(string ID, string pw, string fname, string lname, string room, string phone, vector<Student> ad);
 	string GetID();
 	string GetPassword();
 	string GetFirstName();
