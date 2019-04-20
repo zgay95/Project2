@@ -25,19 +25,6 @@ void printElement(T t, const int& width)
 {
 	cout << left << setw(width) << setfill(separator) << t;
 }
-/* Creates advisor instances,
-*  loads data passed into
-*  private fields to use in other functions
-*/
-Advisor::Advisor(string ID, string pw, string fname, string lname, string room, string phone, vector<Student> ad) :User(ID, pw) {
-	//this->ID = ID;
-	//this->password = pw;
-	this->fName = fname;
-	this->lName = lname;
-	this->room = room;
-	this->phone_num = phone;
-	this->advisees = ad;
-}
 string Advisor::GetID() {
 	return User::GetuserID();
 }
