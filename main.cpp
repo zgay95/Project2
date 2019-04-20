@@ -87,12 +87,6 @@ int main() {
 					}
 					auto it = find_if(Students.begin(), Students.end(), [&nextdata](Student& obj) {return obj.GetID() == nextdata; });
 					auto index = distance(Students.begin(), it);
-
-					if (index == Students.size()) 
-					{
-						break;
-					}
-
 					advisees.push_back(Students[index]);
 				}
 			}
