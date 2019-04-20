@@ -10,6 +10,7 @@
 #include <iomanip>
 #include <string>
 #include <vector>
+#include <algorithm>
 #include <ctime>
 #include "Advisor.h"
 #include "Student.h"
@@ -123,12 +124,12 @@ void Advisor::printAdviseeList(vector<Student> students) {
 	cout << left << setw(6) << "Major";
 	cout << left << setw(11) << "Total Hours\n";
 
-	for (int i = 0; i < students.size(); i++) {
+	for (Student a: students) {
 
-		cout << left << setw(8) << students[i].GetID();
-		cout << left << setw(nameWidth + 4) << students[i].GetFirstName() << " " << students[i].GetLastName();
-		cout << left << setw(6) << students[i].GetMajor();
-		cout << right << setw(7) << students[i].GetTotalHours() << "\n";
+		cout << left << setw(8) << a.GetID();
+		cout << left << setw(nameWidth + 4) << a.GetFirstName() << " " << a.GetLastName();
+		cout << left << setw(6) << a.GetMajor();
+		cout << right << setw(7) << a.GetTotalHours() << "\n";
 	}
 
 	cout << "\n";
@@ -415,7 +416,7 @@ void Advisor::addAdvisee(vector<Advisor> b,vector<Student> k) {
 			}
 			for (Student j : k) {
 				if ((j.GetID()).compare(id) == 0 && i!=2) {
-					cout << "Add " << j.GetID << " " << j.GetFirstName << " " << j.GetLastName << "(y/n) ?";
+					cout << "Add " << j.GetID() << " " << j.GetFirstName() << " " << j.GetLastName() << "(y/n) ?";
 					cin >> c;
 					if (c == 'y' || c == 'Y')
 						advisees.push_back(j);
@@ -449,13 +450,13 @@ void Advisor::removeAdvisee() {
 		cin >> id;
 		try {
 			for (Student a : advisees) {
-				if (id.compare(a.GetID) == 0) {
-					cout << "Remove " << a.GetID << " " << a.GetFirstName << " " << a.GetLastName << "(y/n) ? ";
+				if (id.compare(a.GetID()) == 0) {
+					cout << "Remove " << a.GetID() << " " << a.GetFirstName() << " " << a.GetLastName() << "(y/n) ? ";
 					cin >> c;
 					i = 1;
 					if (c == 'y' || c == 'Y') {
 						advisees.erase(advisees.begin() + k);
-						cout << "Removed " << a.GetID << " " << a.GetFirstName << " " << a.GetLastName << endl;
+						cout << "Removed " << a.GetID() << " " << a.GetFirstName() << " " << a.GetLastName() << endl;
 					}
 				}
 				k++;
@@ -491,7 +492,7 @@ void Advisor::searchNonAdvisee(vector<Student> allStudents, vector<Advisor> allA
 	cin >> queue;
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
+	
 	for (studentIndex = 0; studentIndex < allStudents.size(); studentIndex++) {
 
 		if (allStudents[studentIndex].GetID().compare(queue) == 0) {
