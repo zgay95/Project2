@@ -26,7 +26,7 @@ private:
 	string phone_num;
 	vector<Student> advisees;
 public:
-	Advisor(string ID, string pw, string fname, string lname, string room, string phone, vector<Student> ad):User(ID,pw){};
+	Advisor(string ID, string pw, string fname, string lname, string room, string phone, vector<Student> ad) :User(ID, pw) {};
 	string GetID();
 	string GetPassword();
 	string GetFirstName();
@@ -34,18 +34,19 @@ public:
 	string GetRoom();
 	string GetPhoneNum();
 	string GetAdvisees();
+	vector<Student> GetallAdvisees();
 	bool SearchStudent(string StudentID);
 	void printMenu();
 	void printAdviseeList(vector<Student> students);
 	void printAdviseeList();
-    	bool static sortByID(Student left, Student right);
-    	bool static sortByMajor(Student left, Student right);
-    	bool static sortByHours(Student left, Student right);
+	bool static sortByID(Student left, Student right);
+	bool static sortByMajor(Student left, Student right);
+	bool static sortByHours(Student left, Student right);
 	void search();
 	void printNotesMenu();
 	void showNotes();
 	void addNote();
-	void addAdvisee();
+	void addAdvisee(vector<Advisor> b, vector<Student> k);
 	void removeAdvisee();
 	void moveAdvisees();
 	void searchNonAdvisee(vector<Student> allStudents, vector<Advisor> allAdvisors);
