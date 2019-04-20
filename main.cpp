@@ -244,7 +244,7 @@ int main() {
 				Advisors[index].moveAdvisees();
 				break;
 			case 7:
-				Advisors[index].searchNonAdvisee(Students);
+				Advisors[index].searchNonAdvisee(Students, Advisors);
 				break;
 			case 8:
 				Advisors[index].printAdvisorList(Advisors);
