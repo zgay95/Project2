@@ -17,17 +17,6 @@ int readline(char a[], int b) {
 	a[i] = '\0';
 	return i;
 }
-
-Student::Student(string a, string p, string b, string c, int d, double e, string f, string g):User(f,p) {
-	firstName = a;
-	//password = p;
-	lastName = b;
-	major = c;
-	TotalHours = d;
-	GPA = e;
-	//ID = f;
-	Notes = g;
-}
 string Student::GetID() {
 	return User::GetuserID();
 }
