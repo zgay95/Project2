@@ -18,8 +18,8 @@ using namespace std;
 
 class Advisor : public User {
 private:
-	string ID;
-	string password;
+	/*string ID;
+	string password; We actualy dont need ID and password because it is an inheritance of User*/
 	string fName;
 	string lName;
 	string room;
