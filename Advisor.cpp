@@ -477,33 +477,46 @@ using namespace std;
 	 *  Should only display name, ID and Advisor
 	 *  Do not use printAdviseeList()
 	 */
-	void Advisor::searchNonAdvisee(vector<Student> allStudents) {
+	void Advisor::searchNonAdvisee(vector<Student> allStudents, vector<Advisor> allAdvisors) {
 
         string queue;
-        int index;
+        int studentIndex, advisorIndex;
         
         cout << "Enter ID of student: ";
         cin >> queue;
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         
-        for (index = 0; index < allStudents.size(); index++) {
+        for (studentIndex = 0; studentIndex < allStudents.size(); studentIndex++) {
             
-            if (allStudents[index].GetID().compare(queue) == 0 ) {
+            if (allStudents[studentIndex].GetID().compare(queue) == 0 ) {
                 break;
             }
         }
         
-        if (index == allStudents.size()) {
+        if (studentIndex == allStudents.size()) {
             cout << "No student found.\n\n";
             return;
         }
         
+        for (advisorIndex = 0; advisorIndex < allAdvisors.size(); advisorIndex++) {
+            
+            if (allAdvisors[advisorIndex].SearchStudent(allStudents[studentIndex].GetID())) {
+                break;
+            }
+        }
+        
+        
         cout << "\nResult found:\n";
-        cout << allStudents[index].GetID() << " ";
-        cout << allStudents[index].GetFirstName() << " " << allStudents[index].GetLastName();
-        cout << "\nCurrent advisor: I'll put this part in\n\n";
+        cout << allStudents[studentIndex].GetID() << " ";
+        cout << allStudents[studentIndex].GetFirstName() << " " << allStudents[studentIndex].GetLastName() << "\n";
+        if (advisorIndex >= allAdvisors.size()) {
+            cout << "No advisor found for this student.\n";
+        } else {
+            cout << "Current advisor: " << allAdvisors[advisorIndex].GetFirstName() << " " << allAdvisors[advisorIndex].GetLastName() << "\n";
+        }
 	}
+
 
 	/*
 	 *  Prints detailed list of all advisors
