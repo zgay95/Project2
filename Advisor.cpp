@@ -28,9 +28,9 @@ using namespace std;
 	*  loads data passed into 
 	*  private fields to use in other functions
 	*/
-	Advisor::Advisor(string ID, string pw, string fname, string lname, string room, string phone, vector<Student> ad) {
-		this->ID = ID;
-		this->password = pw;
+	Advisor::Advisor(string ID, string pw, string fname, string lname, string room, string phone, vector<Student> ad):User(ID,pw) {
+		//this->ID = ID;
+		//this->password = pw;
 		this->fName = fname;
 		this->lName = lname;
 		this->room = room;
@@ -38,10 +38,10 @@ using namespace std;
 		this->advisees = ad;
 	}
 	string Advisor::GetID() {
-		return this->ID;
+		return User::GetuserID();
 	}
 	string Advisor::GetPassword() {
-		return this->password;
+		return User::Getpassword();
 	}
 	string Advisor::GetFirstName() {
 		return this->fName;
