@@ -16,7 +16,7 @@
 
 using namespace std;
 
-class Advisor : User {
+class Advisor : public User {
 private:
 	string ID;
 	string password;
@@ -26,7 +26,7 @@ private:
 	string phone_num;
 	vector<Student> advisees;
 public:
-	Advisor(string ID, string pw, string fname, string lname, string room, string phone, vector<Student> ad);
+	Advisor(string ID, string pw, string fname, string lname, string room, string phone, vector<Student> ad):User(ID,pw){};
 	string GetID();
 	string GetPassword();
 	string GetFirstName();
