@@ -12,11 +12,11 @@ private:
 	string major;
 	int TotalHours;
 	double GPA;
-	/*string ID;
-	string password; We actualy dont need ID and password because it is an inheritance of User*/
+	string ID;
+	string password;
 	string Notes;
 public:
-	Student(string a, string p, string b, string c, int d, double e, string f, string g) :User(a, b) {};
+	Student(string a, string p, string b, string c, int d, double e, string f, string g);
 	string GetID();
 	string GetPassword();
 	string GetFirstName();
