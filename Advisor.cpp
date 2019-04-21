@@ -218,6 +218,11 @@ void Advisor::search() {
 		}
 	} while (!selectionIsValid);
 
+	if ((GetallAdvisees()).size() == 0) {
+		cout<<"There is no advisees! "<<endl;
+		return;
+	}
+	
 	switch (selection) {
 
 	case 1:
