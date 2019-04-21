@@ -267,15 +267,17 @@ int main() {
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 				switch (StudentmenuSelection) {
 				case 0: //View advisor data
-					for (size_t i = 0; i < Advisors.size(); i++)
+					for (Advisor ad : Advisors)
 					{
-						if (Advisors[i].SearchStudent(Students[i].GetID()))
-						{
-							cout << "Advisor Infomation: " << endl;
-							cout << "ID: " << Advisors[i].GetID() << endl;
-							cout << "Name: " << Advisors[i].GetFirstName() << " " << Advisors[i].GetLastName() << endl;
-							cout << "Room#: " << Advisors[i].GetRoom() << endl;
-							cout << "Phone#: " << Advisors[i].GetPhoneNum() << endl;
+						for (Student st : ad.GetallAdvisees()) {
+							if (((st.GetID()).compare(Students[index].GetID()))==0)
+							{
+								cout << "Advisor Infomation: " << endl;
+								cout << "ID: " << ad.GetID() << endl;
+								cout << "Name: " << ad.GetFirstName() << " " << ad.GetLastName() << endl;
+								cout << "Room#: " << ad.GetRoom() << endl;
+								cout << "Phone#: " << ad.GetPhoneNum() << endl;
+							}
 						}
 					}
 					break;
