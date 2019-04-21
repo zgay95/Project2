@@ -56,8 +56,8 @@ public:
 	void addNote();
 	void addAdvisee(vector<Advisor> b, vector<Student> k);
 	void removeAdvisee();
-	void moveAdvisees(vector<Advisor> allAdvisors);
-    	void adviseesPushBack(Student student);
+	void moveAdvisees(vector<Advisor>* allAdvisors);
+    	void adviseesPushBack(Student* student);
 	void searchNonAdvisee(vector<Student> allStudents, vector<Advisor> allAdvisors);
 	void printAdvisorList(vector<Advisor> allAdvisors);
 	void showMajorDetails();
