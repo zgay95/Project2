@@ -147,6 +147,11 @@ void Advisor::printAdviseeList() {
 		}
 	} while (!selectionIsValid);
 
+	if ((GetallAdvisees()).size() == 0) {
+		cout << "There is no advisees! " << endl;
+		return;
+	}
+
 	switch (selection) {
 
 	case 1:
@@ -217,12 +222,7 @@ void Advisor::search() {
 			cout << "Invalid entry! Try again...\n";
 		}
 	} while (!selectionIsValid);
-
-	if ((GetallAdvisees()).size() == 0) {
-		cout<<"There is no advisees! "<<endl;
-		return;
-	}
-	
+	int o = 0;
 	switch (selection) {
 
 	case 1:
@@ -233,8 +233,11 @@ void Advisor::search() {
 		for (size_t i = 0; i < advisees.size(); i++) {
 			if (advisees[i].GetID().compare(queue) == 0) {
 				searchResults.push_back(advisees[i]);
+				o = 1;
 			}
 		}
+		if (o == 0)
+			cout << "No student was found!" << endl;
 		break;
 	case 2:
 		cout << "Enter Major: ";
@@ -244,8 +247,11 @@ void Advisor::search() {
 		for (size_t i = 0; i < advisees.size(); i++) {
 			if (advisees[i].GetMajor().compare(queue) == 0) {
 				searchResults.push_back(advisees[i]);
+				o = 1;
 			}
 		}
+		if (o == 0)
+			cout << "No student was found!" << endl;
 		break;
 	case 3:
 		cout << "Enter min hours: ";
@@ -260,8 +266,11 @@ void Advisor::search() {
 			totalHours = stoi(advisees[i].GetTotalHours());
 			if (min <= totalHours && max >= totalHours) {
 				searchResults.push_back(advisees[i]);
+				o = 1;
 			}
 		}
+		if (o == 0)
+			cout << "No student was found!" << endl;
 		break;
 	case 4:
 		cout << "Enter Major: ";
@@ -280,8 +289,11 @@ void Advisor::search() {
 			totalHours = stoi(advisees[i].GetTotalHours());
 			if (min <= totalHours && max >= totalHours && advisees[i].GetMajor().compare(queue) == 0) {
 				searchResults.push_back(advisees[i]);
+				o = 1;
 			}
 		}
+		if (o == 0)
+			cout << "No student was found!" << endl;
 		break;
 	case 0:
 		return;
