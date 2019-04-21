@@ -406,7 +406,7 @@ void Advisor::addNote() {
 void Advisor::addAdvisee(vector<Advisor> b, vector<Student> k) {
 	string id;
 	char c;
-	int i = 0,v=0;
+	int i = 0;
 	while (i == 0) {
 		cout << "Plase enter student ID: ";
 		cin >> id;
@@ -414,21 +414,19 @@ void Advisor::addAdvisee(vector<Advisor> b, vector<Student> k) {
 			for (Advisor a : b) {
 				for (Student d : a.GetallAdvisees()) {
 					if (id.compare(d.GetID()) == 0) {
-						if (a.GetID().compare(GetID())==0) {
-							i = 2;
-						}
-						else {
-							cout << "Add " << d.GetID() << " " << d.GetFirstName() << " " << d.GetLastName() << "(y/n) ?";
-							cin >> c;
-							if (c == 'y' || c == 'Y') {
-								advisees.push_back(d);
-								//ERASE THE STUDENT FROM THE LAST ADVISOR
-							}
-							i = 1;
-						}
+						i = 2;
 					}
 				}
-				v++;
+			}
+			for (Student j : k) {
+				if ((j.GetID()).compare(id) == 0 && i != 2) {
+					cout << "Add " << j.GetID() << " " << j.GetFirstName() << " " << j.GetLastName() << "(y/n) ?";
+					cin >> c;
+					if (c == 'y' || c == 'Y')
+						advisees.push_back(j);
+					i = 1;
+				}
+
 			}
 			if (i == 0)
 				throw "<ERROR> No such student!";
@@ -479,9 +477,90 @@ void Advisor::removeAdvisee() {
 /*
  * Moves students specified by major
  */
-void Advisor::moveAdvisees() {
+void Advisor::moveAdvisees(vector<Advisor> allAdvisors) {
+    
+    string major, advisorID, specialCode;
+    vector<Student> studentsToMove;
+    int receiverIndex;
+    
+    cout << "\nEnter Major (ex: EE): ";
+    cin >> major;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    
+    for (int i = 0; i < advisees.size(); i++) {
+        
+        if (advisees[i].GetMajor().compare(major) == 0) {
+            studentsToMove.push_back(advisees[i]);
+        }
+    }
+    
+    cout << "Students to move: \n";
+    printAdviseeList(studentsToMove);
+    
+    cout << "\nEnter ID of receiving Advisor: ";
+    cin >> advisorID;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    
+    for (receiverIndex = 0; receiverIndex < allAdvisors.size(); receiverIndex++) {
+        
+        if (allAdvisors[receiverIndex].GetID().compare(advisorID) == 0) {
+            break;
+        }
+    }
+    
+    if (receiverIndex == allAdvisors.size()) {
+        cout << "Advisor not found.\n";
+        return;
+    }
+    
+    string code;
+    cout << "Enter authorization code: ";
+    cin >> code;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    
+    if (!(code.compare("ENB#342") == 0)) {
+        cout << "Invalid code. Move cancelled.\n";
+        return;
+    }
+    
+    string ID, note;
+    for (int i = 0; i < studentsToMove.size(); i++) {
+        
+        allAdvisors[receiverIndex].adviseesPushBack(studentsToMove[i]);
+        
+        ID = studentsToMove[i].GetID();
+        
+        time_t now = time(0);
+        tm *ltm = localtime(&now);
+        int Year = (1970 + ltm->tm_year);
+        int Month = (1 + ltm->tm_mon);
+        int Day = (ltm->tm_mday);
+        //create header for note
+        string date = to_string(Month) + "/" + to_string(Day) + "/" + to_string(Year);
+        string header = "(" + this->GetID() + " " + date + ") " + ID + " ";
+        
+        note = ID + " " + header + "***ADVISOR CHANGE FROM " + this->GetID() + " TO " + allAdvisors[receiverIndex].GetID() + "\n";
+        
+        studentsToMove[i].SetNote(note);
+        
+        auto iter = find_if(advisees.begin(), advisees.end(), [ID](Student student) {
+            return (student.GetID().compare(ID) == 0);
+        });
+        advisees.erase(iter);
+    }
+    
+    cout << "Advisees successfully moved.\n";
+}
 
-	//code will go here
+/*
+ *  Adds given student to advisees list
+ */
+void Advisor::adviseesPushBack(Student student) {
+    
+    advisees.push_back(student);
 }
 
 /*
