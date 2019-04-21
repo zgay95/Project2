@@ -111,7 +111,7 @@ void Advisor::printAdviseeList(vector<Student> students) {
 	cout << left << setw(6) << "Major";
 	cout << left << setw(11) << "Total Hours\n";
 
-	for (Student a: students) {
+	for (Student a : students) {
 
 		cout << left << setw(8) << a.GetID();
 		cout << left << setw(nameWidth + 4) << a.GetFirstName() << " " << a.GetLastName();
@@ -151,13 +151,13 @@ void Advisor::printAdviseeList() {
 	switch (selection) {
 
 	case 1:
-		sort(advisees.begin(), advisees.end() + advisees.size(), sortByID);
+		sort(advisees.begin(), advisees.begin() + advisees.size(), sortByID);
 		break;
 	case 2:
-		sort(advisees.begin(), advisees.end() + advisees.size(), sortByMajor);
+		sort(advisees.begin(), advisees.begin() + advisees.size(), sortByMajor);
 		break;
 	case 3:
-		sort(advisees.begin(), advisees.end() + advisees.size(), sortByHours);
+		sort(advisees.begin(), advisees.begin() + advisees.size(), sortByHours);
 		break;
 	case 0:
 		return;
@@ -226,7 +226,7 @@ void Advisor::search() {
 		cin >> queue;
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		for (int i = 0; i < advisees.size(); i++) {
+		for (size_t i = 0; i < advisees.size(); i++) {
 			if (advisees[i].GetID().compare(queue) == 0) {
 				searchResults.push_back(advisees[i]);
 			}
@@ -237,7 +237,7 @@ void Advisor::search() {
 		cin >> queue;
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		for (int i = 0; i < advisees.size(); i++) {
+		for (size_t i = 0; i < advisees.size(); i++) {
 			if (advisees[i].GetMajor().compare(queue) == 0) {
 				searchResults.push_back(advisees[i]);
 			}
@@ -252,7 +252,7 @@ void Advisor::search() {
 		cin >> max;
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		for (int i = 0; i < advisees.size(); i++) {
+		for (size_t i = 0; i < advisees.size(); i++) {
 			totalHours = stoi(advisees[i].GetTotalHours());
 			if (min <= totalHours && max >= totalHours) {
 				searchResults.push_back(advisees[i]);
@@ -271,7 +271,8 @@ void Advisor::search() {
 		cout << "Enter max hours: ";
 		cin >> max;
 		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');                for (int i = 0; i < advisees.size(); i++) {
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');                
+		for (size_t i = 0; i < advisees.size(); i++) {
 			totalHours = stoi(advisees[i].GetTotalHours());
 			if (min <= totalHours && max >= totalHours && advisees[i].GetMajor().compare(queue) == 0) {
 				searchResults.push_back(advisees[i]);
@@ -386,7 +387,7 @@ void Advisor::addNote() {
  *  Prompt for student ID.
  *  Search for student and handle adding them
  */
-void Advisor::addAdvisee(vector<Advisor> b,vector<Student> k) {
+void Advisor::addAdvisee(vector<Advisor> b, vector<Student> k) {
 	string id;
 	char c;
 	int i = 0;
@@ -397,19 +398,19 @@ void Advisor::addAdvisee(vector<Advisor> b,vector<Student> k) {
 			for (Advisor a : b) {
 				for (Student d : a.GetallAdvisees()) {
 					if (id.compare(d.GetID()) == 0) {
-						i = 2;		
+						i = 2;
 					}
 				}
 			}
 			for (Student j : k) {
-				if ((j.GetID()).compare(id) == 0 && i!=2) {
+				if ((j.GetID()).compare(id) == 0 && i != 2) {
 					cout << "Add " << j.GetID() << " " << j.GetFirstName() << " " << j.GetLastName() << "(y/n) ?";
 					cin >> c;
 					if (c == 'y' || c == 'Y')
 						advisees.push_back(j);
 					i = 1;
 				}
-				
+
 			}
 			if (i == 0)
 				throw "<ERROR> No such student!";
@@ -479,7 +480,7 @@ void Advisor::searchNonAdvisee(vector<Student> allStudents, vector<Advisor> allA
 	cin >> queue;
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	
+
 	for (studentIndex = 0; studentIndex < allStudents.size(); studentIndex++) {
 
 		if (allStudents[studentIndex].GetID().compare(queue) == 0) {
