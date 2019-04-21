@@ -94,7 +94,6 @@ void Advisor::printMenu() {
 	cout << " [0] Quit\n\n";
 	cout << "==========================\n\n";
 }
-
 /*
  *  Displays detail list of students in given vector
  */
@@ -112,9 +111,9 @@ void Advisor::printAdviseeList(vector<Student> students) {
 	cout << left << setw(11) << "Total Hours\n";
 
 	for (Student a : students) {
-
+		string fullname = a.GetFirstName() + " " + a.GetLastName();
 		cout << left << setw(8) << a.GetID();
-		cout << left << setw(nameWidth + 4) << a.GetFirstName() << " " << a.GetLastName();
+		cout << left << setw(nameWidth + 4) << fullname;
 		cout << left << setw(6) << a.GetMajor();
 		cout << right << setw(7) << a.GetTotalHours() << "\n";
 	}
