@@ -270,7 +270,7 @@ void Advisor::search() {
 		cout << "Enter max hours: ";
 		cin >> max;
 		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');                
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		for (size_t i = 0; i < advisees.size(); i++) {
 			totalHours = stoi(advisees[i].GetTotalHours());
 			if (min <= totalHours && max >= totalHours && advisees[i].GetMajor().compare(queue) == 0) {
@@ -554,7 +554,7 @@ void Advisor::showMajorDetails() {
 		if (count != 0)
 		{
 			cout << "Total count of Advisees with " << major << " : " << count << endl;
-			cout << "Average GPA: " << AveGPA;
+			cout << "Average GPA: " << AveGPA << endl;
 		}
 		else
 		{
