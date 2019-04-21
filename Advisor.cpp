@@ -482,7 +482,7 @@ void Advisor::removeAdvisee() {
 void Advisor::moveAdvisees(vector<Advisor>* allAdvisors) {
     
     string major, advisorID, specialCode;
-    vector<Student*> studentsToMove;
+    vector<Student> studentsToMove;
     int receiverIndex;
     
     cout << "\nEnter Major (ex: EE): ";
@@ -493,9 +493,12 @@ void Advisor::moveAdvisees(vector<Advisor>* allAdvisors) {
     for (int i = 0; i < advisees.size(); i++) {
         
         if (advisees[i].GetMajor().compare(major) == 0) {
-            studentsToMove.push_back(&(advisees[i]));
+            studentsToMove.push_back(advisees[i]);
         }
     }
+    
+    cout << "\nAdvisees to be moved: ";
+    printAdviseeList(studentsToMove);
     
     cout << "\nEnter ID of receiving Advisor: ";
     cin >> advisorID;
@@ -528,9 +531,7 @@ void Advisor::moveAdvisees(vector<Advisor>* allAdvisors) {
     string ID, note;
     for (int i = 0; i < studentsToMove.size(); i++) {
         
-        (*allAdvisors)[receiverIndex].adviseesPushBack(studentsToMove[i]);
-        
-        ID = studentsToMove[i]->GetID();
+        ID = studentsToMove[i].GetID();
         
         time_t now = time(0);
         tm *ltm = localtime(&now);
@@ -543,7 +544,9 @@ void Advisor::moveAdvisees(vector<Advisor>* allAdvisors) {
         
         note = ID + " " + header + "***ADVISOR CHANGE FROM " + this->GetID() + " TO " + (*allAdvisors)[receiverIndex].GetID() + "\n";
         
-        studentsToMove[i]->SetNote(note);
+        studentsToMove[i].SetNote(note);
+        
+        (*allAdvisors)[receiverIndex].adviseesPushBack(studentsToMove[i]);
         
         auto iter = find_if(advisees.begin(), advisees.end(), [ID](Student student) {
             return (student.GetID().compare(ID) == 0);
@@ -557,10 +560,11 @@ void Advisor::moveAdvisees(vector<Advisor>* allAdvisors) {
 /*
  *  Adds given student to advisees list
  */
-void Advisor::adviseesPushBack(Student* student) {
+void Advisor::adviseesPushBack(Student student) {
     
-    advisees.push_back(*student);
+    advisees.push_back(student);
 }
+
 
 /*
  *  Search student by ID that is not on Advisee list.
