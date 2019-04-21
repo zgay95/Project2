@@ -170,15 +170,15 @@ void Advisor::printAdviseeList() {
 /* Functions for sorting */
 bool Advisor::sortByID(Student left, Student right) {
 
-	return (left.GetID().compare(right.GetID()) <= 0);
+	return (left.GetID().compare(right.GetID()) < 0);
 }
 bool Advisor::sortByMajor(Student left, Student right) {
 
-	return (left.GetMajor().compare(right.GetMajor()) <= 0);
+	return (left.GetMajor().compare(right.GetMajor()) < 0);
 }
 bool Advisor::sortByHours(Student left, Student right) {
 
-	return (left.GetTotalHours().compare(right.GetTotalHours()) <= 0);
+	return (left.GetTotalHours().compare(right.GetTotalHours()) < 0);
 }
 
 
