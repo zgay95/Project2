@@ -406,7 +406,7 @@ void Advisor::addNote() {
 void Advisor::addAdvisee(vector<Advisor> b, vector<Student> k) {
 	string id;
 	char c;
-	int i = 0;
+	int i = 0,v=0;
 	while (i == 0) {
 		cout << "Plase enter student ID: ";
 		cin >> id;
@@ -414,19 +414,21 @@ void Advisor::addAdvisee(vector<Advisor> b, vector<Student> k) {
 			for (Advisor a : b) {
 				for (Student d : a.GetallAdvisees()) {
 					if (id.compare(d.GetID()) == 0) {
-						i = 2;
+						if (a.GetID().compare(GetID())==0) {
+							i = 2;
+						}
+						else {
+							cout << "Add " << d.GetID() << " " << d.GetFirstName() << " " << d.GetLastName() << "(y/n) ?";
+							cin >> c;
+							if (c == 'y' || c == 'Y') {
+								advisees.push_back(d);
+								//ERASE THE STUDENT FROM THE LAST ADVISOR
+							}
+							i = 1;
+						}
 					}
 				}
-			}
-			for (Student j : k) {
-				if ((j.GetID()).compare(id) == 0 && i != 2) {
-					cout << "Add " << j.GetID() << " " << j.GetFirstName() << " " << j.GetLastName() << "(y/n) ?";
-					cin >> c;
-					if (c == 'y' || c == 'Y')
-						advisees.push_back(j);
-					i = 1;
-				}
-
+				v++;
 			}
 			if (i == 0)
 				throw "<ERROR> No such student!";
