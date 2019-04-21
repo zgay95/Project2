@@ -1,11 +1,11 @@
-﻿ST00,test00,Salina,Mark,CS,2.12,92
+ST00,test00,Salina,Mark,CS,2.12,92
 ST01,test01,Jean,Kumara,EE,3.50,40
 ST02,test02,Eligius,Netta,IE,2.55,100
 ST03,test03,Achilles,Diana,ME,3.23,86
 ST04,test04,Vernon,Miriam,CH,1.46,43
 ST05,test05,Gidie,Ellanher,CE,3.23,72
 ST06,test06,Randolph,Gussie,EE,2.90,87
-ST07,test07,Carloman,Mór,EE,4.00,33
+ST07,test07,Carloman,Mor,EE,4.00,33
 ST08,test08,Don,Elsa,ME,3.76,21
 ST09,test09,Hades,Paskal,CS,2.12,40
 ST10,test10,Nilus,Reneer,IE,1.32,72
@@ -26,7 +26,7 @@ ST24,test24,Esther,Bautista,CS,2.27,58
 ST25,test25,Ester,Eveliina,IE,1.64,55
 ST26,test26,Abhijit,Joye,CH,3.85,110
 ST27,test27,Jojo,Andrina,CE,3.92,55
-ST28,test28,Tuvya,Olívia,EE,2.12,40
+ST28,test28,Tuvya,Olivia,EE,2.12,40
 ST29,test29,Kenaniah,Yoram,CS,2.26,28
 ST30,test30,Glory,Dumi,IE,2.35,86
 ST31,test31,Dilip,Ludivine,EE,3.94,39
@@ -46,6 +46,6 @@ ST44,test44,Tufayl,Salomon,EE,3.06,21
 ST45,test45,Maja,Feidelm,ME,3.07,15
 ST46,test46,Quintin,Yngvar,CH,2.15,106
 ST47,test47,Angilberct,Jonatan,IE,1.24,60
-ST48,test48,Caitlín,Clement,CS,2.80,64
-ST49,test49,Mitchell,Dáire,EE,2.94,78
+ST48,test48,Caitlin,Clement,CS,2.80,64
+ST49,test49,Mitchell,Daire,EE,2.94,78
 
