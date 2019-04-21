@@ -2,6 +2,7 @@
 #define STUDENT_H
 #include<iostream>
 #include<string.h>
+#include<vector>
 #include "User.h"
 
 using namespace std;
@@ -15,6 +16,7 @@ private:
 	//string ID;
 	//string password;
 	string Notes;
+	vector<string> notes;
 public:
 	Student(string a, string p, string b, string c, int d, double e, string f, string g) :User(f, p) {
 		firstName = a;
@@ -25,7 +27,7 @@ public:
 		GPA = e;
 		//ID = f;
 		Notes = g;
-	
+		SetNote(g);
 	};
 	string GetID();
 	string GetPassword();
@@ -43,4 +45,4 @@ public:
 	void changeTotalHours(int k);
 	void SetNote(string Note);
 };
-#endif 
+#endif
