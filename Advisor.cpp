@@ -418,15 +418,17 @@ void Advisor::addAdvisee(vector<Advisor> b, vector<Student> k) {
 					}
 				}
 			}
-			for (Student j : k) {
-				if ((j.GetID()).compare(id) == 0 && i != 2) {
-					cout << "Add " << j.GetID() << " " << j.GetFirstName() << " " << j.GetLastName() << "(y/n) ?";
-					cin >> c;
-					if (c == 'y' || c == 'Y')
-						advisees.push_back(j);
-					i = 1;
-				}
+			if (i != 2) {
+				for (Student j : k) {
+					if ((j.GetID()).compare(id) == 0 && i != 2) {
+						cout << "Add " << j.GetID() << " " << j.GetFirstName() << " " << j.GetLastName() << "(y/n) ?";
+						cin >> c;
+						if (c == 'y' || c == 'Y')
+							advisees.push_back(j);
+						i = 1;
+					}
 
+				}
 			}
 			if (i == 0)
 				throw "<ERROR> No such student!";
