@@ -42,6 +42,10 @@ string Student::GetNotes() {
 	return this->Notes;
 }
 void Student::view() {
+	for (string a : notes)//For some reason it is not printing the notes
+		cout << a << endl;
+
+	cout << endl;
 	cout << "Student ID: " << User::GetuserID() << "\n" << firstName << " " << lastName << "`s major: " << major << "\nTotal Hours: " << TotalHours << "\nGPA: " << GPA << endl;
 }
 void Student::menu() {
@@ -113,5 +117,5 @@ void Student::changeTotalHours(int k) {
 }
 
 void Student::SetNote(string Note) {
-	this->Notes = Note;
+	notes.push_back(Note);
 }
