@@ -41,6 +41,9 @@ string Student::GetGPA() {
 string Student::GetNotes() {
 	return this->Notes;
 }
+vector<string> Student::getallnotes() {
+	return notes;
+}
 void Student::view() {
 	for (string a : notes)//For some reason it is not printing the notes
 		cout << a << endl;
