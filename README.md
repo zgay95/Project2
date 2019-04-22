@@ -12,8 +12,11 @@ A 'readme.txt' short report to indicate where in your program code (i.e., which 
 
 -STL algorithms (at least two)
 
--Function template (Done in Advisor class)
+-Function template 
+Advisor.cpp Line 23
 
--Lambda expression (Done in main())
+-Lambda expression 
+Main.cpp Line 101
 
--Exception handling (Done in User class)
+-Exception handling 
+Student.cpp Line 106
