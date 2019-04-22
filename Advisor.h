@@ -51,13 +51,13 @@ public:
 	bool static sortByMajor(Student left, Student right);
 	bool static sortByHours(Student left, Student right);
 	void search();
-	void printNotesMenu();
+	void printNotesMenu(vector<Student>* allStudents);
 	void showNotes();
-	void addNote();
+	void addNote(vector<Student>* allStudents);
 	void addAdvisee(vector<Advisor> b, vector<Student> k);
 	void removeAdvisee();
-	void moveAdvisees(vector<Advisor>* allAdvisors);
-    	void adviseesPushBack(Student student);
+	void moveAdvisees(vector<Advisor>* allAdvisors, vector<Student>* allStudents);
+	void adviseesPushBack(Student student);
 	void searchNonAdvisee(vector<Student> allStudents, vector<Advisor> allAdvisors);
 	void printAdvisorList(vector<Advisor> allAdvisors);
 	void showMajorDetails();
