@@ -38,11 +38,8 @@ string Student::GetTotalHours() {
 string Student::GetGPA() {
 	return to_string(this->GPA);
 }
-string Student::GetNotes() {
-	return this->Notes;
-}
-vector<string> Student::getallnotes() {
-	return notes;
+vector<string> Student::GetNotes() {
+	return this->notes;
 }
 void Student::view() {
 	for (string a : notes)//For some reason it is not printing the notes
