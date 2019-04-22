@@ -338,10 +338,14 @@ int main() {
 		string TotalHours = Students[i].GetTotalHours();
 		AB += TotalHours;
 
-		string Notes = Students[i].GetNotes();
-		CD += Notes;
+		vector<string> Notes = Students[i].getallnotes();
+		for (string n : Notes) {
+			CD += n;
+			CD += ",";
+		}
+		CD += "\n";
 
-		if (Notes != "")
+		if (Notes.size()!=0)
 		{
 			writeStudNotes.push_back(CD);
 		}
