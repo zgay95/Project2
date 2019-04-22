@@ -40,8 +40,8 @@ public:
 	void menu();
 	void view();
 	void update();
-	void ChangeMajor(string f);
-	void ChangeGPA(double g);
+	void Change(string f);
+	void Change(double g);
 	void changeTotalHours(int k);
 	void SetNote(string Note);
 };
