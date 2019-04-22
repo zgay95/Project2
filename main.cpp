@@ -43,13 +43,26 @@ int main() {
 		string major = StudData[i];			i++;
 		double GPA = stod(StudData[i]);		i++;
 		int TotalHours = stoi(StudData[i]);
-		string Notes = "";
+		vector <string> Notes ;
 		//search if student has notes
 		for (size_t i = 0; i < StudNotes.size(); i++)
 		{
 			if ((StudNotes[i]).compare(ID) == 0)
 			{
-				Notes = StudNotes[i + 1];
+				string allnotes;
+				while ( i+1 < StudNotes.size())
+				{
+					if (StudNotes[i + 1][0] != 'S' &&
+						StudNotes[i + 1][17] == ID[0] &&
+						StudNotes[i + 1][18] == ID[1] && 
+						StudNotes[i + 1][19] == ID[2] && 
+						StudNotes[i + 1][20] == ID[3])
+					{
+						allnotes += StudNotes[i + 1] + "\n";
+					}
+					i++;
+				}
+				Notes.push_back(allnotes);
 				break;
 			}
 		}
@@ -232,7 +245,7 @@ int main() {
 					Advisors[index].search();
 					break;
 				case 3:
-					Advisors[index].printNotesMenu();
+					Advisors[index].printNotesMenu(&Students);
 					break;
 				case 4:
 					Advisors[index].addAdvisee(Advisors, Students);
@@ -241,7 +254,7 @@ int main() {
 					Advisors[index].removeAdvisee();
 					break;
 				case 6:
-					Advisors[index].moveAdvisees(&Advisors);
+					Advisors[index].moveAdvisees(&Advisors, &Students);
 					break;
 				case 7:
 					Advisors[index].searchNonAdvisee(Students, Advisors);
@@ -270,7 +283,7 @@ int main() {
 					for (Advisor ad : Advisors)
 					{
 						for (Student st : ad.GetallAdvisees()) {
-							if (((st.GetID()).compare(Students[index].GetID()))==0)
+							if (((st.GetID()).compare(Students[index].GetID())) == 0)
 							{
 								cout << "Advisor Infomation: " << endl;
 								cout << "ID: " << ad.GetID() << endl;
@@ -338,14 +351,15 @@ int main() {
 		string TotalHours = Students[i].GetTotalHours();
 		AB += TotalHours;
 
-		vector<string> Notes = Students[i].getallnotes();
-		for (string n : Notes) {
-			CD += n;
-			CD += ",";
-		}
-		CD += "\n";
+		vector <string> Notes = Students[i].GetNotes();
 
-		if (Notes.size()!=0)
+		for (size_t i = 0; i < Notes.size(); i++)
+		{
+			CD += Notes[i];
+			CD += "\n";
+		}
+
+		if (Notes.size() != 0)
 		{
 			writeStudNotes.push_back(CD);
 		}
