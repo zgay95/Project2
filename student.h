@@ -37,6 +37,7 @@ public:
 	string GetTotalHours();
 	string GetGPA();
 	string GetNotes();
+	vector<string> getallnotes();
 	void menu();
 	void view();
 	void update();
