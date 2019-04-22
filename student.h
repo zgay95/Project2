@@ -15,10 +15,10 @@ private:
 	double GPA;
 	//string ID;
 	//string password;
-	string Notes;
+	//string Notes;
 	vector<string> notes;
 public:
-	Student(string a, string p, string b, string c, int d, double e, string f, string g) :User(f, p) {
+	Student(string a, string p, string b, string c, int d, double e, string f, vector <string> g) :User(f, p) {
 		firstName = a;
 		//password = p;
 		lastName = b;
@@ -26,8 +26,8 @@ public:
 		TotalHours = d;
 		GPA = e;
 		//ID = f;
-		Notes = g;
-		SetNote(g);
+		//Notes = g;
+		notes = g;
 	};
 	string GetID();
 	string GetPassword();
@@ -36,8 +36,7 @@ public:
 	string GetMajor();
 	string GetTotalHours();
 	string GetGPA();
-	string GetNotes();
-	vector<string> getallnotes();
+	vector<string> GetNotes();
 	void menu();
 	void view();
 	void update();
