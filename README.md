@@ -9,8 +9,13 @@ A 'readme.txt' short report to indicate where in your program code (i.e., which 
 -overriding
 
 -STL containers (at least two)
+main.cpp Line 17
+main.cpp Line 18
 
 -STL algorithms (at least two)
+Advisor.cpp Line 158
+Advisor.cpp Line 161
+Advisor.cpp Line 164
 
 -Function template 
 Advisor.cpp Line 23
