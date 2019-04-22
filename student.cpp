@@ -51,11 +51,11 @@ void Student::view() {
 void Student::menu() {
 	cout << "========== Menu ==========\n\n0-View advisor information\n1-View information\n2-Update information\n3-Exit\n\n==========================\n" << endl;
 }
-void Student::ChangeMajor(string f) {
+void Student::Change(string f) {
 	major = f;
 	cout << "Major updated successfully!!" << endl;
 }
-void Student::ChangeGPA(double g) {
+void Student::Change(double g) {
 	try {
 		if (g<0.0 || g>4.0) {
 
@@ -84,13 +84,13 @@ void Student::update() {
 		switch (n) {
 		case 1:cout << "New GPA: ";
 			cin >> new_GPA;
-			Student::ChangeGPA(new_GPA);
+			Student::Change(new_GPA);
 			break;
 		case 2:cout << "New Major: ";
 			i = readline(a, 100);
 			for (j = 0; j <= i; j++)
 				new_major.push_back(a[j]);
-			Student::ChangeMajor(new_major);
+			Student::Change(new_major);
 			break;
 		case 3:cout << "Total Hours: ";
 			cin >> new_hours;
